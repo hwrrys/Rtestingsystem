@@ -1,4 +1,5 @@
 library(shiny)
+library(readtext)
 fluidPage(
   titlePanel("YetAnoterProject"),
   radioButtons("Languages", label = h3("Language"),
@@ -12,58 +13,73 @@ fluidPage(
       sidebarPanel(
         selectInput("programminglanguage", label = h3("Select Programming Language"), 
                     choices = list("Pascal" = 1, "python" = 2, "C++" = 3), 
-                    selected = 1),
+                    selected = 2),
       ),
       mainPanel(
         tabsetPanel(
           type = "tabs",
           tabPanel(
             "Task A",
+            verbatimTextOutput("valueA"),
             fileInput("fileA", label = h3("Put Your Code Here")),
             actionButton("actionUA", label = "Check"),
-#            fluidRow(column(2, verbatimTextOutput("value"))),
+            tableOutput('UA'),
             hr()
           ),
           tabPanel(
             "Task B",
+            verbatimTextOutput("valueB"),
             fileInput("fileB", label = h3("Put Your Code Here")),
             actionButton("actionUB", label = "Check"),
+            tableOutput('UB'),
             hr()
           ),
           tabPanel(
             "Task C",
+            verbatimTextOutput("valueC"),
             fileInput("fileC", label = h3("Put Your Code Here")),
             actionButton("actionUC", label = "Check"),
+            tableOutput('UC'),
             hr()
           ),
           tabPanel(
             "Task D",
+            verbatimTextOutput("valueD"),
             fileInput("fileD", label = h3("Put Your Code Here")),
             actionButton("actionUD", label = "Check"),
+            tableOutput('UD'),
             hr()
           ),
           tabPanel(
             "Task E",
+            verbatimTextOutput("valueE"),
             fileInput("fileE", label = h3("Put Your Code Here")),
             actionButton("actionUE", label = "Check"),
+            tableOutput('UE'),
             hr()
           ),
           tabPanel(
             "Task F",
+            verbatimTextOutput("valueF"),
             fileInput("fileF", label = h3("Put Your Code Here")),
             actionButton("actionUF", label = "Check"),
+            tableOutput('UF'),
             hr()
           ),
           tabPanel(
             "Task G",
+            verbatimTextOutput("valueG"),
             fileInput("fileG", label = h3("Put Your Code Here")),
             actionButton("actionUG", label = "Check"),
+            tableOutput('UG'),
             hr()
           ),
           tabPanel(
             "Task Z",
+            verbatimTextOutput("valueZ"),
             fileInput("fileZ", label = h3("Put Your Code Here")),
             actionButton("actionUZ", label = "Check"),
+            tableOutput('UZ'),
             hr()
           )
         ),
@@ -77,7 +93,10 @@ fluidPage(
           "Task A",
           sidebarPanel(
             fileInput("descriptionA", label = "Description here"),
-            actionButton("actionAA", label = "Add description"),
+            fileInput("testsA", label = "Tests here"),
+            fileInput("AA", label = "Answers here"),
+            actionButton("actionAA", label = "Add description and tests"),
+            tableOutput('TA'),
             hr()
           ),
         ),
@@ -85,7 +104,10 @@ fluidPage(
           "Task B",
           sidebarPanel(
             fileInput("descriptionB", label = "Description here"),
-            actionButton("actionAB", label = "Add description"),
+            fileInput("testsB", label = "Tests here"),
+            fileInput("AB", label = "Answers here"),
+            actionButton("actionAB", label = "Add description and tests"),
+            tableOutput('TB'),
             hr()
           ),
         ),
@@ -93,7 +115,10 @@ fluidPage(
           "Task C",
           sidebarPanel(
             fileInput("descriptionC", label = "Description here"),
-            actionButton("actionAC", label = "Add description"),
+            fileInput("testsC", label = "Tests here"),
+            fileInput("AC", label = "Answers here"),
+            actionButton("actionAC", label = "Add description and tests"),
+            tableOutput('TC'),
             hr()
           ),
         ),
@@ -101,7 +126,10 @@ fluidPage(
           "Task D",
           sidebarPanel(
             fileInput("descriptionD", label = "Description here"),
-            actionButton("actionAD", label = "Add description"),
+            fileInput("testsD", label = "Tests here"),
+            fileInput("AD", label = "Answers here"),
+            actionButton("actionAD", label = "Add description and tests"),
+            tableOutput('TD'),
             hr()
           ),
         ),
@@ -109,7 +137,10 @@ fluidPage(
           "Task E",
           sidebarPanel(
             fileInput("descriptionE", label = "Description here"),
-            actionButton("actionAE", label = "Add description"),
+            fileInput("testsE", label = "Tests here"),
+            fileInput("AE", label = "Answers here"),
+            actionButton("actionAE", label = "Add description and tests"),
+            tableOutput('TE'),
             hr()
           ),
         ),
@@ -117,7 +148,10 @@ fluidPage(
           "Task F",
           sidebarPanel(
             fileInput("descriptionF", label = "Description here"),
-            actionButton("actionAF", label = "Add description"),
+            fileInput("testsF", label = "Tests here"),
+            fileInput("AF", label = "Answers here"),
+            actionButton("actionAF", label = "Add description and tests"),
+            tableOutput('TF'),
             hr()
           ),
         ),
@@ -125,7 +159,10 @@ fluidPage(
           "Task G",
           sidebarPanel(
             fileInput("descriptionG", label = "Description here"),
-            actionButton("actionAG", label = "Add description"),
+            fileInput("testsG", label = "Tests here"),
+            fileInput("AG", label = "Answers here"),
+            actionButton("actionAG", label = "Add description and tests"),
+            tableOutput('TG'),
             hr()
           ),
         ),
@@ -133,7 +170,10 @@ fluidPage(
           "Task Z",
           sidebarPanel(
             fileInput("descriptionZ", label = "Description here"),
-            actionButton("actionAZ", label = "Add description"),
+            fileInput("testsZ", label = "Tests here"),
+            fileInput("AZ", label = "Answers here"),
+            actionButton("actionAZ", label = "Add description and tests"),
+            tableOutput('TZ'),
             hr()
           ),
         )
