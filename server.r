@@ -1,11 +1,442 @@
-library(shiny)
-library(plotly)
-function(input, output){
-  
-  # You can access the value of the widget with input$file, e.g.
-  output$value <- renderPrint({
-    str(input$file)
+function(input, output) {
+  AU <- eventReactive(input$actionUA, {
+    con = file(input$fileA$name, "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("1.txt", "w", encoding = 'UTF-8')
+    } else {
+      conn = file("1c.cpp", "w", encoding = 'UTF-8')
+    }
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    if (input$programminglanguage == 2) {
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsA.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          close(conn)
+          shell.exec("p.bat")
+          Sys.sleep(2)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+    }
+    close(con)
+    close(conn)
+  }, ignoreNULL = FALSE)
+  output$UA <- renderTable({
+    AU()
   })
-  output$value <- renderPrint({ input$language
-    })
-} 
+  A <- eventReactive(input$actionAA, {
+    con = file(input$descriptionA$name, "r", encoding = 'UTF-8')
+    conn = file("TaskA.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$testsA$name, "r", encoding = 'UTF-8')
+    conn = file("TestsA.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$AA$name, "r", encoding = 'UTF-8')
+    conn = file("AnsA.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    read.csv(input$descriptionA$name, sep = '`', dec = '~', encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$TA <- renderTable({
+    A()
+  })
+  B <- eventReactive(input$actionAB, {
+    con = file(input$descriptionB$name, "r", encoding = 'UTF-8')
+    conn = file("TaskB.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$testsB$name, "r", encoding = 'UTF-8')
+    conn = file("TestsB.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$AB$name, "r", encoding = 'UTF-8')
+    conn = file("AnsB.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    read.csv(input$descriptionB$name, sep = '`', dec = '~', encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$TB <- renderTable({
+    B()
+  })
+  C <- eventReactive(input$actionAC, {
+    con = file(input$descriptionC$name, "r", encoding = 'UTF-8')
+    conn = file("TaskC.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$testsC$name, "r", encoding = 'UTF-8')
+    conn = file("TestsC.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$AC$name, "r", encoding = 'UTF-8')
+    conn = file("AnsC.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    read.csv(input$descriptionC$name, sep = '`', dec = '~', encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$TC <- renderTable({
+    C()
+  })
+  D <- eventReactive(input$actionAD, {
+    con = file(input$descriptionD$name, "r", encoding = 'UTF-8')
+    conn = file("TaskD.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$testsD$name, "r", encoding = 'UTF-8')
+    conn = file("TestsD.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$AD$name, "r", encoding = 'UTF-8')
+    conn = file("AnsD.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    read.csv(input$descriptionD$name, sep = '`', dec = '~', encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$TD <- renderTable({
+    D()
+  })
+  E <- eventReactive(input$actionAE, {
+    con = file(input$descriptionE$name, "r", encoding = 'UTF-8')
+    conn = file("TaskE.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$testsE$name, "r", encoding = 'UTF-8')
+    conn = file("TestsE.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$AE$name, "r", encoding = 'UTF-8')
+    conn = file("AnsE.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    read.csv(input$descriptionE$name, sep = '`', dec = '~', encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$TE <- renderTable({
+    E()
+  })
+  ff <- eventReactive(input$actionAF, {
+    con = file(input$descriptionF$name, "r", encoding = 'UTF-8')
+    conn = file("TaskF.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$testsF$name, "r", encoding = 'UTF-8')
+    conn = file("TestsF.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$AF$name, "r", encoding = 'UTF-8')
+    conn = file("AnsF.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    read.csv(input$descriptionF$name, sep = '`', dec = '~', encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$TF <- renderTable({
+    ff()
+  })
+  G <- eventReactive(input$actionAG, {
+    con = file(input$descriptionG$name, "r", encoding = 'UTF-8')
+    conn = file("TaskG.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$testsG$name, "r", encoding = 'UTF-8')
+    conn = file("TestsG.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$AG$name, "r", encoding = 'UTF-8')
+    conn = file("AnsG.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    read.csv(input$descriptionG$name, sep = '`', dec = '~', encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$TG <- renderTable({
+    G()
+  })
+  Z <- eventReactive(input$actionAZ, {
+    con = file(input$descriptionZ$name, "r", encoding = 'UTF-8')
+    conn = file("TaskZ.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$testsZ$name, "r", encoding = 'UTF-8')
+    conn = file("TestsZ.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    con = file(input$AZ$name, "r", encoding = 'UTF-8')
+    conn = file("AnsZ.txt", "w", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    read.csv(input$descriptionZ$name, sep = '`', dec = '~', encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$TZ <- renderTable({
+    Z()
+  })
+  output$valueA <- renderPrint({
+    con = file("TaskA.txt", "r", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      print(line)
+    }
+    close(con)
+  })
+  output$valueB <- renderPrint({
+    con = file("TaskB.txt", "r", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      print(line)
+    }
+    close(con)
+  })
+  output$valueC <- renderPrint({
+    con = file("TaskC.txt", "r", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      print(line)
+    }
+    close(con)
+  })
+  output$valueD <- renderPrint({
+    con = file("TaskD.txt", "r", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      print(line)
+    }
+    close(con)
+  })
+  output$valueE <- renderPrint({
+    con = file("TaskE.txt", "r", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      print(line)
+    }
+    close(con)
+  })
+  output$valueF <- renderPrint({
+    con = file("TaskF.txt", "r", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      print(line)
+    }
+    close(con)
+  })
+  output$valueG <- renderPrint({
+    con = file("TaskG.txt", "r", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      print(line)
+    }
+    close(con)
+  })
+  output$valueZ <- renderPrint({
+    con = file("TaskZ.txt", "r", encoding = 'UTF-8')
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      print(line)
+    }
+    close(con)
+  })
+}
