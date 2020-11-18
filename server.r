@@ -1,185 +1,186 @@
 function(input, output) {
-  
+  Log <- eventReactive(input$Login, {
+    input$password
+  }, ignoreNULL = FALSE)
   output$ui <- renderUI({
     if (is.null(input$password))
       return()
-    
-    switch(input$password,
-      "UserPassword" = mainPanel(sidebarPanel(
-        selectInput("programminglanguage", label = h3("Select Programming Language"), 
-                    choices = list("Pascal" = 1, "python" = 2, "C++" = 3), 
-                    selected = 2),
-        ),
-        mainPanel(
-          tabsetPanel(
-            type = "tabs",
-            tabPanel(
-              "Task A",
-              verbatimTextOutput("valueA"),
-              fileInput("fileA", label = h3("Put Your Code Here")),
-              actionButton("actionUA", label = "Check"),
-              tableOutput('UA'),
-              hr()
-            ),
-            tabPanel(
-              "Task B",
-              verbatimTextOutput("valueB"),
-              fileInput("fileB", label = h3("Put Your Code Here")),
-              actionButton("actionUB", label = "Check"),
-              tableOutput('UB'),
-              hr()
-            ),
-            tabPanel(
-              "Task C",
-              verbatimTextOutput("valueC"),
-              fileInput("fileC", label = h3("Put Your Code Here")),
-              actionButton("actionUC", label = "Check"),
-              tableOutput('UC'),
-              hr()
-            ),
-            tabPanel(
-              "Task D",
-              verbatimTextOutput("valueD"),
-              fileInput("fileD", label = h3("Put Your Code Here")),
-              actionButton("actionUD", label = "Check"),
-              tableOutput('UD'),
-              hr()
-            ),
-            tabPanel(
-              "Task E",
-              verbatimTextOutput("valueE"),
-              fileInput("fileE", label = h3("Put Your Code Here")),
-              actionButton("actionUE", label = "Check"),
-              tableOutput('UE'),
-              hr()
-            ),
-            tabPanel(
-              "Task F",
-              verbatimTextOutput("valueF"),
-              fileInput("fileF", label = h3("Put Your Code Here")),
-              actionButton("actionUF", label = "Check"),
-              tableOutput('UF'),
-              hr()
-            ),
-            tabPanel(
-              "Task G",
-              verbatimTextOutput("valueG"),
-              fileInput("fileG", label = h3("Put Your Code Here")),
-              actionButton("actionUG", label = "Check"),
-              tableOutput('UG'),
-              hr()
-            ),
-            tabPanel(
-              "Task Z",
-              verbatimTextOutput("valueZ"),
-              fileInput("fileZ", label = h3("Put Your Code Here")),
-              actionButton("actionUZ", label = "Check"),
-              tableOutput('UZ'),
-              hr()
-            )
-          ),
-        )),
-      "AdminPassword" =tabsetPanel(
-        type = "tabs",
-        tabPanel(
-          "Task A",
-          sidebarPanel(
-            fileInput("descriptionA", label = "Description here"),
-            fileInput("testsA", label = "Tests here"),
-            fileInput("AA", label = "Answers here"),
-            actionButton("actionAA", label = "Add description and tests"),
-            tableOutput('TA'),
-            hr()
-          ),
-          ),
-          tabPanel(
-            "Task B",
-            sidebarPanel(
-              fileInput("descriptionB", label = "Description here"),
-              fileInput("testsB", label = "Tests here"),
-              fileInput("AB", label = "Answers here"),
-              actionButton("actionAB", label = "Add description and tests"),
-              tableOutput('TB'),
-              hr()
-            ),
-          ),
-          tabPanel(
-            "Task C",
-            sidebarPanel(
-              fileInput("descriptionC", label = "Description here"),
-              fileInput("testsC", label = "Tests here"),
-              fileInput("AC", label = "Answers here"),
-              actionButton("actionAC", label = "Add description and tests"),
-              tableOutput('TC'),
-              hr()
-            ),
-          ),
-          tabPanel(
-            "Task D",
-            sidebarPanel(
-              fileInput("descriptionD", label = "Description here"),
-              fileInput("testsD", label = "Tests here"),
-              fileInput("AD", label = "Answers here"),
-              actionButton("actionAD", label = "Add description and tests"),
-              tableOutput('TD'),
-              hr()
-            ),
-          ),
-          tabPanel(
-            "Task E",
-            sidebarPanel(
-              fileInput("descriptionE", label = "Description here"),
-              fileInput("testsE", label = "Tests here"),
-              fileInput("AE", label = "Answers here"),
-              actionButton("actionAE", label = "Add description and tests"),
-              tableOutput('TE'),
-              hr()
-            ),
-          ),
-          tabPanel(
-            "Task F",
-            sidebarPanel(
-              fileInput("descriptionF", label = "Description here"),
-              fileInput("testsF", label = "Tests here"),
-              fileInput("AF", label = "Answers here"),
-              actionButton("actionAF", label = "Add description and tests"),
-              tableOutput('TF'),
-              hr()
-            ),
-          ),
-          tabPanel(
-            "Task G",
-            sidebarPanel(
-              fileInput("descriptionG", label = "Description here"),
-              fileInput("testsG", label = "Tests here"),
-              fileInput("AG", label = "Answers here"),
-              actionButton("actionAG", label = "Add description and tests"),
-              tableOutput('TG'),
-              hr()
-            ),
-          ),
-          tabPanel(
-            "Task Z",
-            sidebarPanel(
-              fileInput("descriptionZ", label = "Description here"),
-              fileInput("testsZ", label = "Tests here"),
-              fileInput("AZ", label = "Answers here"),
-              actionButton("actionAZ", label = "Add description and tests"),
-              tableOutput('TZ'),
-              hr()
-            ),
-          )
-        )
-           
-           
-      )
+    switch(Log(),
+           "1" = mainPanel(sidebarPanel(
+             selectInput("programminglanguage", label = h3("Select Programming Language"), 
+                         choices = list("Pascal" = 1, "python" = 2, "C++" = 3), 
+                         selected = 2),
+           ),
+           mainPanel(
+             tabsetPanel(
+               type = "tabs",
+               tabPanel(
+                 "Task A",
+                 verbatimTextOutput("valueA"),
+                 fileInput("fileA", label = h3("Put Your Code Here")),
+                 actionButton("actionUA", label = "Check"),
+                 tableOutput('UUA'),
+                 tableOutput("UA"),
+                 hr()
+               ),
+               tabPanel(
+                 "Task B",
+                 verbatimTextOutput("valueB"),
+                 fileInput("fileB", label = h3("Put Your Code Here")),
+                 actionButton("actionUB", label = "Check"),
+                 tableOutput('UUB'),
+                 tableOutput("UB"),
+                 hr()
+               ),
+               tabPanel(
+                 "Task C",
+                 verbatimTextOutput("valueC"),
+                 fileInput("fileC", label = h3("Put Your Code Here")),
+                 actionButton("actionUC", label = "Check"),
+                 tableOutput('UUC'),
+                 tableOutput("UC"),
+                 hr()
+               ),
+               tabPanel(
+                 "Task D",
+                 verbatimTextOutput("valueD"),
+                 fileInput("fileD", label = h3("Put Your Code Here")),
+                 actionButton("actionUD", label = "Check"),
+                 tableOutput('UUD'),
+                 tableOutput("UD"),
+                 hr()
+               ),
+               tabPanel(
+                 "Task E",
+                 verbatimTextOutput("valueE"),
+                 fileInput("fileE", label = h3("Put Your Code Here")),
+                 actionButton("actionUE", label = "Check"),
+                 tableOutput('UUE'),
+                 tableOutput("UE"),
+                 hr()
+               ),
+               tabPanel(
+                 "Task F",
+                 verbatimTextOutput("valueF"),
+                 fileInput("fileF", label = h3("Put Your Code Here")),
+                 actionButton("actionUF", label = "Check"),
+                 tableOutput('UUF'),
+                 tableOutput("UF"),
+                 hr()
+               ),
+               tabPanel(
+                 "Task G",
+                 verbatimTextOutput("valueG"),
+                 fileInput("fileG", label = h3("Put Your Code Here")),
+                 actionButton("actionUG", label = "Check"),
+                 tableOutput('UUG'),
+                 tableOutput("UG"),
+                 hr()
+               ),
+               tabPanel(
+                 "Task Z",
+                 verbatimTextOutput("valueZ"),
+                 fileInput("fileZ", label = h3("Put Your Code Here")),
+                 actionButton("actionUZ", label = "Check"),
+                 tableOutput('UUZ'),
+                 tableOutput("UZ"),
+                 hr()
+               )
+             ),
+           )),
+           "AdminPassword" =tabsetPanel(
+             type = "tabs",
+             tabPanel(
+               "Task A",
+               sidebarPanel(
+                 fileInput("descriptionA", label = "Description here"),
+                 fileInput("testsA", label = "Tests here"),
+                 fileInput("AA", label = "Answers here"),
+                 actionButton("actionAA", label = "Add description and tests"),
+                 tableOutput('TA'),
+                 hr()
+               ),
+             ),
+             tabPanel(
+               "Task B",
+               sidebarPanel(
+                 fileInput("descriptionB", label = "Description here"),
+                 fileInput("testsB", label = "Tests here"),
+                 fileInput("AB", label = "Answers here"),
+                 actionButton("actionAB", label = "Add description and tests"),
+                 tableOutput('TB'),
+                 hr()
+               ),
+             ),
+             tabPanel(
+               "Task C",
+               sidebarPanel(
+                 fileInput("descriptionC", label = "Description here"),
+                 fileInput("testsC", label = "Tests here"),
+                 fileInput("AC", label = "Answers here"),
+                 actionButton("actionAC", label = "Add description and tests"),
+                 tableOutput('TC'),
+                 hr()
+               ),
+             ),
+             tabPanel(
+               "Task D",
+               sidebarPanel(
+                 fileInput("descriptionD", label = "Description here"),
+                 fileInput("testsD", label = "Tests here"),
+                 fileInput("AD", label = "Answers here"),
+                 actionButton("actionAD", label = "Add description and tests"),
+                 tableOutput('TD'),
+                 hr()
+               ),
+             ),
+             tabPanel(
+               "Task E",
+               sidebarPanel(
+                 fileInput("descriptionE", label = "Description here"),
+                 fileInput("testsE", label = "Tests here"),
+                 fileInput("AE", label = "Answers here"),
+                 actionButton("actionAE", label = "Add description and tests"),
+                 tableOutput('TE'),
+                 hr()
+               ),
+             ),
+             tabPanel(
+               "Task F",
+               sidebarPanel(
+                 fileInput("descriptionF", label = "Description here"),
+                 fileInput("testsF", label = "Tests here"),
+                 fileInput("AF", label = "Answers here"),
+                 actionButton("actionAF", label = "Add description and tests"),
+                 tableOutput('TF'),
+                 hr()
+               ),
+             ),
+             tabPanel(
+               "Task G",
+               sidebarPanel(
+                 fileInput("descriptionG", label = "Description here"),
+                 fileInput("testsG", label = "Tests here"),
+                 fileInput("AG", label = "Answers here"),
+                 actionButton("actionAG", label = "Add description and tests"),
+                 tableOutput('TG'),
+                 hr()
+               ),
+             ),
+             tabPanel(
+               "Task Z",
+               sidebarPanel(
+                 fileInput("descriptionZ", label = "Description here"),
+                 fileInput("testsZ", label = "Tests here"),
+                 fileInput("AZ", label = "Answers here"),
+                 actionButton("actionAZ", label = "Add description and tests"),
+                 tableOutput('TZ'),
+                 hr()
+               ),
+             )
+           )
+    )
   })
-  
-  
-  
-  
-  
-  
   AU <- eventReactive(input$actionUA, {
     con = file(input$fileA$name, "r", encoding = 'UTF-8')
     if (input$programminglanguage == 2) {
@@ -359,7 +360,1298 @@ function(input, output) {
     read.csv("PA.txt", sep = ",", encoding = 'UTF-8')
   }, ignoreNULL = FALSE)
   output$UA <- renderTable({
+    read.csv("PA.txt", sep = ",", encoding = 'UTF-8')
+  })
+  output$UUA <- renderTable({
     AU()
+  })
+  BU <- eventReactive(input$actionUB, {
+    con = file(input$fileB$name, "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("1.txt", "w", encoding = 'UTF-8')
+    } else {
+      conn = file("1c.cpp", "w", encoding = 'UTF-8')
+    }
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    v = 0
+    t = 0
+    ra = file("AnsB.txt", "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsB.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("p.bat")
+          Sys.sleep(2)
+          ex = file("ex.txt", "r", encoding = 'UTF-8')
+          q = readLines(ex, n = 1)
+          if (length(q) != 0){
+            tt = file("PB.txt", 'a', encoding = 'UTF-8')
+            writeLines("Python, CE", tt, sep = ",")
+            writeLines("-", tt, sep = "\n")
+            close(tt)
+            v = 1
+            break
+          }
+          close(ex)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PB.txt", 'a', encoding = 'UTF-8')
+                writeLines("Python, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PB.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, PE", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PB.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+          if (v == 1) {
+            break
+          }
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PB.txt", 'a', encoding = 'UTF-8')
+        writeLines("Python, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    } else {
+      shell.exec("co++.bat")
+      Sys.sleep(10)
+      ex = file("ex.txt", "r", encoding = 'UTF-8')
+      llll = readLines(ex, n = 1)
+      if (length(llll) != 0) {
+        tt = file("PB.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, CE", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+        v = 1
+      }
+      close(ex)
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsB.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        if (v == 1) {
+          break
+        }
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("c++.bat")
+          Sys.sleep(2)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PB.txt", 'a', encoding = 'UTF-8')
+                writeLines("C++, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PB.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, PE", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PB.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PB.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    }
+    close(con)
+    close(conn)
+    close(ra)
+    read.csv("PB.txt", sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$UB <- renderTable({
+    read.csv("PB.txt", sep = ",", encoding = 'UTF-8')
+  })
+  output$UUB <- renderTable({
+    BU()
+  })
+  CU <- eventReactive(input$actionUC, {
+    con = file(input$fileC$name, "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("1.txt", "w", encoding = 'UTF-8')
+    } else {
+      conn = file("1c.cpp", "w", encoding = 'UTF-8')
+    }
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    v = 0
+    t = 0
+    ra = file("AnsC.txt", "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsC.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("p.bat")
+          Sys.sleep(2)
+          ex = file("ex.txt", "r", encoding = 'UTF-8')
+          q = readLines(ex, n = 1)
+          if (length(q) != 0){
+            tt = file("PC.txt", 'a', encoding = 'UTF-8')
+            writeLines("Python, CE", tt, sep = ",")
+            writeLines("-", tt, sep = "\n")
+            close(tt)
+            v = 1
+            break
+          }
+          close(ex)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PC.txt", 'a', encoding = 'UTF-8')
+                writeLines("Python, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PC.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, PE", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PC.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+          if (v == 1) {
+            break
+          }
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PC.txt", 'a', encoding = 'UTF-8')
+        writeLines("Python, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    } else {
+      shell.exec("co++.bat")
+      Sys.sleep(10)
+      ex = file("ex.txt", "r", encoding = 'UTF-8')
+      llll = readLines(ex, n = 1)
+      if (length(llll) != 0) {
+        tt = file("PC.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, CE", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+        v = 1
+      }
+      close(ex)
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsC.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        if (v == 1) {
+          break
+        }
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("c++.bat")
+          Sys.sleep(2)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PC.txt", 'a', encoding = 'UTF-8')
+                writeLines("C++, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PC.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, PE", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PC.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PC.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    }
+    close(con)
+    close(conn)
+    close(ra)
+    read.csv("PC.txt", sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$UC <- renderTable({
+    read.csv("PC.txt", sep = ",", encoding = 'UTF-8')
+  })
+  output$UUC <- renderTable({
+    CU()
+  })
+  DU <- eventReactive(input$actionUD, {
+    con = file(input$fileD$name, "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("1.txt", "w", encoding = 'UTF-8')
+    } else {
+      conn = file("1c.cpp", "w", encoding = 'UTF-8')
+    }
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    v = 0
+    t = 0
+    ra = file("AnsD.txt", "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsD.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("p.bat")
+          Sys.sleep(2)
+          ex = file("ex.txt", "r", encoding = 'UTF-8')
+          q = readLines(ex, n = 1)
+          if (length(q) != 0){
+            tt = file("PD.txt", 'a', encoding = 'UTF-8')
+            writeLines("Python, CE", tt, sep = ",")
+            writeLines("-", tt, sep = "\n")
+            close(tt)
+            v = 1
+            break
+          }
+          close(ex)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PD.txt", 'a', encoding = 'UTF-8')
+                writeLines("Python, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PD.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, PD", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PD.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+          if (v == 1) {
+            break
+          }
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PD.txt", 'a', encoding = 'UTF-8')
+        writeLines("Python, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    } else {
+      shell.exec("co++.bat")
+      Sys.sleep(10)
+      ex = file("ex.txt", "r", encoding = 'UTF-8')
+      llll = readLines(ex, n = 1)
+      if (length(llll) != 0) {
+        tt = file("PD.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, CE", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+        v = 1
+      }
+      close(ex)
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsD.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        if (v == 1) {
+          break
+        }
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("c++.bat")
+          Sys.sleep(2)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PD.txt", 'a', encoding = 'UTF-8')
+                writeLines("C++, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PD.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, PE", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PD.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PD.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    }
+    close(con)
+    close(conn)
+    close(ra)
+    read.csv("PD.txt", sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$UD <- renderTable({
+    read.csv("PD.txt", sep = ",", encoding = 'UTF-8')
+  })
+  output$UUD <- renderTable({
+    DU()
+  })
+  EU <- eventReactive(input$actionUE, {
+    con = file(input$fileE$name, "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("1.txt", "w", encoding = 'UTF-8')
+    } else {
+      conn = file("1c.cpp", "w", encoding = 'UTF-8')
+    }
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    v = 0
+    t = 0
+    ra = file("AnsE.txt", "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsE.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("p.bat")
+          Sys.sleep(2)
+          ex = file("ex.txt", "r", encoding = 'UTF-8')
+          q = readLines(ex, n = 1)
+          if (length(q) != 0){
+            tt = file("PE.txt", 'a', encoding = 'UTF-8')
+            writeLines("Python, CE", tt, sep = ",")
+            writeLines("-", tt, sep = "\n")
+            close(tt)
+            v = 1
+            break
+          }
+          close(ex)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PE.txt", 'a', encoding = 'UTF-8')
+                writeLines("Python, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PE.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, PD", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PE.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+          if (v == 1) {
+            break
+          }
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PE.txt", 'a', encoding = 'UTF-8')
+        writeLines("Python, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    } else {
+      shell.exec("co++.bat")
+      Sys.sleep(10)
+      ex = file("ex.txt", "r", encoding = 'UTF-8')
+      llll = readLines(ex, n = 1)
+      if (length(llll) != 0) {
+        tt = file("PE.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, CE", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+        v = 1
+      }
+      close(ex)
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsE.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        if (v == 1) {
+          break
+        }
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("c++.bat")
+          Sys.sleep(2)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PE.txt", 'a', encoding = 'UTF-8')
+                writeLines("C++, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PE.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, PE", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PE.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PE.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    }
+    close(con)
+    close(conn)
+    close(ra)
+    read.csv("PE.txt", sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$UE <- renderTable({
+    read.csv("PE.txt", sep = ",", encoding = 'UTF-8')
+  })
+  output$UUE <- renderTable({
+    EU()
+  })
+  FU <- eventReactive(input$actionUF, {
+    con = file(input$fileF$name, "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("1.txt", "w", encoding = 'UTF-8')
+    } else {
+      conn = file("1c.cpp", "w", encoding = 'UTF-8')
+    }
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    v = 0
+    t = 0
+    ra = file("AnsF.txt", "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsF.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("p.bat")
+          Sys.sleep(2)
+          ex = file("ex.txt", "r", encoding = 'UTF-8')
+          q = readLines(ex, n = 1)
+          if (length(q) != 0){
+            tt = file("PF.txt", 'a', encoding = 'UTF-8')
+            writeLines("Python, CE", tt, sep = ",")
+            writeLines("-", tt, sep = "\n")
+            close(tt)
+            v = 1
+            break
+          }
+          close(ex)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PF.txt", 'a', encoding = 'UTF-8')
+                writeLines("Python, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PF.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, PD", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PF.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+          if (v == 1) {
+            break
+          }
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PF.txt", 'a', encoding = 'UTF-8')
+        writeLines("Python, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    } else {
+      shell.exec("co++.bat")
+      Sys.sleep(10)
+      ex = file("ex.txt", "r", encoding = 'UTF-8')
+      llll = readLines(ex, n = 1)
+      if (length(llll) != 0) {
+        tt = file("PF.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, CE", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+        v = 1
+      }
+      close(ex)
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsF.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        if (v == 1) {
+          break
+        }
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("c++.bat")
+          Sys.sleep(2)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PF.txt", 'a', encoding = 'UTF-8')
+                writeLines("C++, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PF.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, PE", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PF.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PF.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    }
+    close(con)
+    close(conn)
+    close(ra)
+    read.csv("PF.txt", sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$UF <- renderTable({
+    read.csv("PF.txt", sep = ",", encoding = 'UTF-8')
+  })
+  output$UUF <- renderTable({
+    FU()
+  })
+  GU <- eventReactive(input$actionUG, {
+    con = file(input$fileG$name, "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("1.txt", "w", encoding = 'UTF-8')
+    } else {
+      conn = file("1c.cpp", "w", encoding = 'UTF-8')
+    }
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    v = 0
+    t = 0
+    ra = file("AnsG.txt", "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsG.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("p.bat")
+          Sys.sleep(2)
+          ex = file("ex.txt", "r", encoding = 'UTF-8')
+          q = readLines(ex, n = 1)
+          if (length(q) != 0){
+            tt = file("PG.txt", 'a', encoding = 'UTF-8')
+            writeLines("Python, CE", tt, sep = ",")
+            writeLines("-", tt, sep = "\n")
+            close(tt)
+            v = 1
+            break
+          }
+          close(ex)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PG.txt", 'a', encoding = 'UTF-8')
+                writeLines("Python, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PG.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, PD", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PG.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+          if (v == 1) {
+            break
+          }
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PG.txt", 'a', encoding = 'UTF-8')
+        writeLines("Python, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    } else {
+      shell.exec("co++.bat")
+      Sys.sleep(10)
+      ex = file("ex.txt", "r", encoding = 'UTF-8')
+      llll = readLines(ex, n = 1)
+      if (length(llll) != 0) {
+        tt = file("PG.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, CE", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+        v = 1
+      }
+      close(ex)
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsG.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        if (v == 1) {
+          break
+        }
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("c++.bat")
+          Sys.sleep(2)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PG.txt", 'a', encoding = 'UTF-8')
+                writeLines("C++, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PG.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, PE", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PG.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PG.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    }
+    close(con)
+    close(conn)
+    close(ra)
+    read.csv("PG.txt", sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$UG <- renderTable({
+    read.csv("PG.txt", sep = ",", encoding = 'UTF-8')
+  })
+  output$UUG <- renderTable({
+    GU()
+  })
+  ZU <- eventReactive(input$actionUZ, {
+    con = file(input$fileZ$name, "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("1.txt", "w", encoding = 'UTF-8')
+    } else {
+      conn = file("1c.cpp", "w", encoding = 'UTF-8')
+    }
+    while ( TRUE ) {
+      line = readLines(con, n = 1)
+      if ( length(line) == 0 ) {
+        break
+      }
+      writeLines(line,conn, sep = "\n")
+    }
+    close(con)
+    close(conn)
+    v = 0
+    t = 0
+    ra = file("AnsZ.txt", "r", encoding = 'UTF-8')
+    if (input$programminglanguage == 2) {
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsZ.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("p.bat")
+          Sys.sleep(2)
+          ex = file("ex.txt", "r", encoding = 'UTF-8')
+          q = readLines(ex, n = 1)
+          if (length(q) != 0){
+            tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+            writeLines("Python, CE", tt, sep = ",")
+            writeLines("-", tt, sep = "\n")
+            close(tt)
+            v = 1
+            break
+          }
+          close(ex)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+                writeLines("Python, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, PD", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+          if (v == 1) {
+            break
+          }
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+        writeLines("Python, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    } else {
+      shell.exec("co++.bat")
+      Sys.sleep(10)
+      ex = file("ex.txt", "r", encoding = 'UTF-8')
+      llll = readLines(ex, n = 1)
+      if (length(llll) != 0) {
+        tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, CE", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+        v = 1
+      }
+      close(ex)
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsZ.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        if (v == 1) {
+          break
+        }
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("c++.bat")
+          Sys.sleep(2)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+                writeLines("C++, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, PE", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    }
+    close(con)
+    close(conn)
+    close(ra)
+    read.csv("PZ.txt", sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$UZ <- renderTable({
+    read.csv("PZ.txt", sep = ",", encoding = 'UTF-8')
+  })
+  output$UUZ <- renderTable({
+    ZU()
   })
   A <- eventReactive(input$actionAA, {
     con = file(input$descriptionA$name, "r", encoding = 'UTF-8')
