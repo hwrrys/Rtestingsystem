@@ -15,6 +15,9 @@ function(input, output) {
     }
     close(con)
     close(conn)
+    v = 0
+    t = 0
+    ra = file("AnsA.txt", "r", encoding = 'UTF-8')
     if (input$programminglanguage == 2) {
       conn = file("in.txt", "w", encoding = 'UTF-8')
       con = file("TestsA.txt", "r", encoding = 'UTF-8')
@@ -24,17 +27,155 @@ function(input, output) {
           break
         }
         if (line == ".") {
+          t = t + 1
           close(conn)
           shell.exec("p.bat")
           Sys.sleep(2)
+          ex = file("ex.txt", "r", encoding = 'UTF-8')
+          q = readLines(ex, n = 1)
+          if (length(q) != 0){
+            tt = file("PA.txt", 'a', encoding = 'UTF-8')
+            writeLines("Python, CE", tt, sep = ",")
+            writeLines("-", tt, sep = "\n")
+            close(tt)
+            v = 1
+            break
+          }
+          close(ex)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PA.txt", 'a', encoding = 'UTF-8')
+                writeLines("Python, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PA.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, PE", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PA.txt", 'a', encoding = 'UTF-8')
+              writeLines("Python, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
+          conn = file("in.txt", "w", encoding = 'UTF-8')
+          if (v == 1) {
+            break
+          }
+        } else {
+          writeLines(line,conn, sep = "\n")
+        }
+      }
+      if (v == 0) {
+        tt = file("PA.txt", 'a', encoding = 'UTF-8')
+        writeLines("Python, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
+    } else {
+      shell.exec("co++.bat")
+      Sys.sleep(10)
+      ex = file("ex.txt", "r", encoding = 'UTF-8')
+      llll = readLines(ex, n = 1)
+      if (length(llll) != 0) {
+        tt = file("PA.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, CE", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+        v = 1
+      }
+      close(ex)
+      conn = file("in.txt", "w", encoding = 'UTF-8')
+      con = file("TestsA.txt", "r", encoding = 'UTF-8')
+      while ( TRUE ) {
+        if (v == 1) {
+          break
+        }
+        line = readLines(con, n = 1)
+        if ( length(line) == 0 ) {
+          break
+        }
+        if (line == ".") {
+          t = t + 1
+          close(conn)
+          shell.exec("c++.bat")
+          Sys.sleep(2)
+          ya = file("out.txt", "r", encoding = 'UTF-8')
+          while(TRUE) {
+            line2 = readLines(ya, n = 1)
+            l = readLines(ra, n = 1)
+            if ( length(line2) == 0 ) {
+              if (l != ".") {
+                tt = file("PA.txt", 'a', encoding = 'UTF-8')
+                writeLines("C++, PE", tt, sep = ",")
+                writeLines(paste0('',t), tt, sep = "\n")
+                close(tt)
+                v = 1
+                while (TRUE) {
+                  lo = readLines(ra, n = 1)
+                  if (lo == "."){
+                    break
+                  }
+                }
+              }
+              break
+            }
+            if (l == '.') {
+              tt = file("PA.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, PE", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+            if (line2 != l) {
+              tt = file("PA.txt", 'a', encoding = 'UTF-8')
+              writeLines("C++, WA", tt, sep = ",")
+              writeLines(paste0('',t), tt, sep = "\n")
+              close(tt)
+              v = 1
+              break
+            }
+          }
+          close(ya)
           conn = file("in.txt", "w", encoding = 'UTF-8')
         } else {
           writeLines(line,conn, sep = "\n")
         }
       }
+      if (v == 0) {
+        tt = file("PA.txt", 'a', encoding = 'UTF-8')
+        writeLines("C++, OK", tt, sep = ",")
+        writeLines("-", tt, sep = "\n")
+        close(tt)
+      }
     }
     close(con)
     close(conn)
+    close(ra)
+    read.csv("PA.txt", sep = ",", encoding = 'UTF-8')
   }, ignoreNULL = FALSE)
   output$UA <- renderTable({
     AU()
