@@ -1,12 +1,46 @@
 function(input, output) {
   Log <- eventReactive(input$Login, {
-    input$password
+    if (input$login == "Admin"){
+      if (input$password == "awdrmki9nj") {
+        return("Admin")
+      }
+    } else {
+      if (input$login == "reg") {
+        return("reg")
+      } else {
+        us = file("Users.txt", "r", encoding = 'UTF-8')
+        while (TRUE) {
+          logins = readLines(us, n = 1)
+          if (length(logins) == 0) {
+            return("No")
+            break
+          }
+          passwords = readLines(us, n = 1)
+          if (logins == input$login) {
+            if (passwords == input$password) {
+              return("User")
+              break
+            }
+          }
+        }
+        close(us)
+      }
+    }
+  }, ignoreNULL = FALSE)
+  logi <- eventReactive(input$Login, {
+    return(input$login)
   }, ignoreNULL = FALSE)
   output$ui <- renderUI({
     if (is.null(input$password))
       return()
     switch(Log(),
-           "1" = mainPanel(sidebarPanel(
+           "reg" = mainPanel(
+             textInput("plr", label = "enter login"),
+             textInput("ppr", label = "enter password"),
+             actionButton("registerb", label = "Register"),
+             verbatimTextOutput("regt")
+           ),
+           "User" = mainPanel(sidebarPanel(
              selectInput("programminglanguage", label = h3("Select Programming Language"), 
                          choices = list("Pascal" = 1, "python" = 2, "C++" = 3), 
                          selected = 2),
@@ -88,7 +122,7 @@ function(input, output) {
                )
              ),
            )),
-           "AdminPassword" =tabsetPanel(
+           "Admin" =tabsetPanel(
              type = "tabs",
              tabPanel(
                "Task A",
@@ -181,7 +215,68 @@ function(input, output) {
            )
     )
   })
+  reeeg <- eventReactive(input$registerb, {
+    con = file("Users.txt", "r", encoding = 'UTF-8')
+    c = 0
+    while (TRUE) {
+      line = readLines(con, n = 1)
+      if (length(line) == 0) {
+        break
+      }
+      ll = readLines(con, n = 1)
+      if (line == input$plr) {
+        return("This user been registred")
+        c = 1
+        break
+      }
+    }
+    if (c == 0) {
+      if (input$plr == '') {
+        c = 1
+        return("Enter a non-empty login")
+      }
+      if (input$ppr == '') {
+        c = 1
+        return("Enter a non-empty password")
+      }
+      if (c == 0) {
+        con = file("Users.txt", "a", encoding = 'UTF-8')
+        writeLines(input$plr,con, sep = "\n")
+        writeLines(input$ppr,con, sep = "\n")
+        close(con)
+        FA = file(paste0(input$plr, "A.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",con, sep = "\n")
+        close(FA)
+        FA = file(paste0(input$plr, "B.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",con, sep = "\n")
+        close(FA)
+        FA = file(paste0(input$plr, "C.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",con, sep = "\n")
+        close(FA)
+        FA = file(paste0(input$plr, "D.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",con, sep = "\n")
+        close(FA)
+        FA = file(paste0(input$plr, "E.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",con, sep = "\n")
+        close(FA)
+        FA = file(paste0(input$plr, "F.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",con, sep = "\n")
+        close(FA)
+        FA = file(paste0(input$plr, "G.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",con, sep = "\n")
+        close(FA)
+        FA = file(paste0(input$plr, "Z.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",con, sep = "\n")
+        close(FA)
+        return(paste0("Registeation was successful and you registerd with name ", input$plr))
+      }
+    }
+  }, ignoreNULL = TRUE)
+  output$regt <- renderPrint({
+    reeeg()
+  })
   AU <- eventReactive(input$actionUA, {
+    name = logi()
     con = file(input$fileA$name, "r", encoding = 'UTF-8')
     if (input$programminglanguage == 2) {
       conn = file("1.txt", "w", encoding = 'UTF-8')
@@ -216,7 +311,7 @@ function(input, output) {
           ex = file("ex.txt", "r", encoding = 'UTF-8')
           q = readLines(ex, n = 1)
           if (length(q) != 0){
-            tt = file("PA.txt", 'a', encoding = 'UTF-8')
+            tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
             writeLines("Python, CE", tt, sep = ",")
             writeLines("-", tt, sep = "\n")
             close(tt)
@@ -230,7 +325,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PA.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -245,7 +340,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PA.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -253,7 +348,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PA.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -271,7 +366,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PA.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -282,7 +377,7 @@ function(input, output) {
       ex = file("ex.txt", "r", encoding = 'UTF-8')
       llll = readLines(ex, n = 1)
       if (length(llll) != 0) {
-        tt = file("PA.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, CE", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -310,7 +405,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PA.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -325,7 +420,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PA.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -333,7 +428,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PA.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -348,7 +443,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PA.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -357,15 +452,18 @@ function(input, output) {
     close(con)
     close(conn)
     close(ra)
-    read.csv("PA.txt", sep = ",", encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+    read.csv(paste0(name, "A.txt"), sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = TRUE)
   output$UA <- renderTable({
-    read.csv("PA.txt", sep = ",", encoding = 'UTF-8')
+    if (input$actionUA == 0) {
+      read.csv(paste0(logi(), "A.txt"), sep = ",", encoding = 'UTF-8')
+    }
   })
   output$UUA <- renderTable({
     AU()
   })
   BU <- eventReactive(input$actionUB, {
+    name = logi()
     con = file(input$fileB$name, "r", encoding = 'UTF-8')
     if (input$programminglanguage == 2) {
       conn = file("1.txt", "w", encoding = 'UTF-8')
@@ -400,7 +498,7 @@ function(input, output) {
           ex = file("ex.txt", "r", encoding = 'UTF-8')
           q = readLines(ex, n = 1)
           if (length(q) != 0){
-            tt = file("PB.txt", 'a', encoding = 'UTF-8')
+            tt = file(paste0(name, "B.txt"), 'a', encoding = 'UTF-8')
             writeLines("Python, CE", tt, sep = ",")
             writeLines("-", tt, sep = "\n")
             close(tt)
@@ -414,7 +512,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PB.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "B.txt"), 'a', encoding = 'UTF-8')
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -429,7 +527,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PB.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "B.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -437,7 +535,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PB.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "B.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -455,7 +553,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PB.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "B.txt"), 'a', encoding = 'UTF-8')
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -466,7 +564,7 @@ function(input, output) {
       ex = file("ex.txt", "r", encoding = 'UTF-8')
       llll = readLines(ex, n = 1)
       if (length(llll) != 0) {
-        tt = file("PB.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "B.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, CE", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -494,7 +592,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PB.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "B.txt"), 'a', encoding = 'UTF-8')
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -509,7 +607,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PB.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "B.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -517,7 +615,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PB.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "B.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -532,7 +630,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PB.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "B.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -541,15 +639,18 @@ function(input, output) {
     close(con)
     close(conn)
     close(ra)
-    read.csv("PB.txt", sep = ",", encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+    read.csv(paste0(name, "B.txt"), sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = TRUE)
   output$UB <- renderTable({
-    read.csv("PB.txt", sep = ",", encoding = 'UTF-8')
+    if (input$actionUB == 0) {
+      read.csv(paste0(logi(), "B.txt"), sep = ",", encoding = 'UTF-8')
+    }
   })
   output$UUB <- renderTable({
     BU()
   })
   CU <- eventReactive(input$actionUC, {
+    name = logi()
     con = file(input$fileC$name, "r", encoding = 'UTF-8')
     if (input$programminglanguage == 2) {
       conn = file("1.txt", "w", encoding = 'UTF-8')
@@ -584,7 +685,7 @@ function(input, output) {
           ex = file("ex.txt", "r", encoding = 'UTF-8')
           q = readLines(ex, n = 1)
           if (length(q) != 0){
-            tt = file("PC.txt", 'a', encoding = 'UTF-8')
+            tt = file(paste0(name, "C.txt"), 'a', encoding = 'UTF-8')
             writeLines("Python, CE", tt, sep = ",")
             writeLines("-", tt, sep = "\n")
             close(tt)
@@ -598,7 +699,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PC.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "C.txt"), 'a', encoding = 'UTF-8')
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -613,7 +714,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PC.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "C.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -621,7 +722,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PC.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "C.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -639,7 +740,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PC.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "C.txt"), 'a', encoding = 'UTF-8')
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -650,7 +751,7 @@ function(input, output) {
       ex = file("ex.txt", "r", encoding = 'UTF-8')
       llll = readLines(ex, n = 1)
       if (length(llll) != 0) {
-        tt = file("PC.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "C.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, CE", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -678,7 +779,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PC.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "C.txt"), 'a', encoding = 'UTF-8')
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -693,7 +794,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PC.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "C.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -701,7 +802,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PC.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "C.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -716,7 +817,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PC.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "C.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -725,15 +826,18 @@ function(input, output) {
     close(con)
     close(conn)
     close(ra)
-    read.csv("PC.txt", sep = ",", encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+    read.csv(paste0(name, "C.txt"), sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = TRUE)
   output$UC <- renderTable({
-    read.csv("PC.txt", sep = ",", encoding = 'UTF-8')
+    if (input$actionUC == 0) {
+      read.csv(paste0(logi(), "C.txt"), sep = ",", encoding = 'UTF-8')
+    }
   })
   output$UUC <- renderTable({
     CU()
   })
   DU <- eventReactive(input$actionUD, {
+    name = logi()
     con = file(input$fileD$name, "r", encoding = 'UTF-8')
     if (input$programminglanguage == 2) {
       conn = file("1.txt", "w", encoding = 'UTF-8')
@@ -768,7 +872,7 @@ function(input, output) {
           ex = file("ex.txt", "r", encoding = 'UTF-8')
           q = readLines(ex, n = 1)
           if (length(q) != 0){
-            tt = file("PD.txt", 'a', encoding = 'UTF-8')
+            tt = file(paste0(name, "D.txt"), 'a', encoding = 'UTF-8')
             writeLines("Python, CE", tt, sep = ",")
             writeLines("-", tt, sep = "\n")
             close(tt)
@@ -782,7 +886,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PD.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "D.txt"), 'a', encoding = 'UTF-8')
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -797,7 +901,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PD.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "D.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, PD", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -805,7 +909,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PD.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "D.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -823,7 +927,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PD.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "D.txt"), 'a', encoding = 'UTF-8')
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -834,7 +938,7 @@ function(input, output) {
       ex = file("ex.txt", "r", encoding = 'UTF-8')
       llll = readLines(ex, n = 1)
       if (length(llll) != 0) {
-        tt = file("PD.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "D.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, CE", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -862,7 +966,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PD.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "D.txt"), 'a', encoding = 'UTF-8')
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -877,7 +981,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PD.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "D.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -885,7 +989,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PD.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "D.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -900,7 +1004,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PD.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "D.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -909,15 +1013,18 @@ function(input, output) {
     close(con)
     close(conn)
     close(ra)
-    read.csv("PD.txt", sep = ",", encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+    read.csv(paste0(name, "D.txt"), sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = TRUE)
   output$UD <- renderTable({
-    read.csv("PD.txt", sep = ",", encoding = 'UTF-8')
+    if (input$actionUD == 0) {
+      read.csv(paste0(logi(), "D.txt"), sep = ",", encoding = 'UTF-8')
+    }
   })
   output$UUD <- renderTable({
     DU()
   })
   EU <- eventReactive(input$actionUE, {
+    name = logi
     con = file(input$fileE$name, "r", encoding = 'UTF-8')
     if (input$programminglanguage == 2) {
       conn = file("1.txt", "w", encoding = 'UTF-8')
@@ -952,7 +1059,7 @@ function(input, output) {
           ex = file("ex.txt", "r", encoding = 'UTF-8')
           q = readLines(ex, n = 1)
           if (length(q) != 0){
-            tt = file("PE.txt", 'a', encoding = 'UTF-8')
+            tt = file(paste0(name, "E.txt"), 'a', encoding = 'UTF-8')
             writeLines("Python, CE", tt, sep = ",")
             writeLines("-", tt, sep = "\n")
             close(tt)
@@ -966,7 +1073,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PE.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "E.txt"), 'a', encoding = 'UTF-8')
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -981,7 +1088,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PE.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "E.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, PD", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -989,7 +1096,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PE.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "E.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1007,7 +1114,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PE.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "E.txt"), 'a', encoding = 'UTF-8')
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -1018,7 +1125,7 @@ function(input, output) {
       ex = file("ex.txt", "r", encoding = 'UTF-8')
       llll = readLines(ex, n = 1)
       if (length(llll) != 0) {
-        tt = file("PE.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "E.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, CE", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -1046,7 +1153,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PE.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "E.txt"), 'a', encoding = 'UTF-8')
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -1061,7 +1168,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PE.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "E.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1069,7 +1176,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PE.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "E.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1084,7 +1191,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PE.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "E.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -1093,15 +1200,18 @@ function(input, output) {
     close(con)
     close(conn)
     close(ra)
-    read.csv("PE.txt", sep = ",", encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+    read.csv(paste0(name, "E.txt"), sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = TRUE)
   output$UE <- renderTable({
-    read.csv("PE.txt", sep = ",", encoding = 'UTF-8')
+    if (input$actionUE == 0) {
+      read.csv(paste0(logi(), "E.txt"), sep = ",", encoding = 'UTF-8')
+    }
   })
   output$UUE <- renderTable({
     EU()
   })
   FU <- eventReactive(input$actionUF, {
+    name = logi()
     con = file(input$fileF$name, "r", encoding = 'UTF-8')
     if (input$programminglanguage == 2) {
       conn = file("1.txt", "w", encoding = 'UTF-8')
@@ -1136,7 +1246,7 @@ function(input, output) {
           ex = file("ex.txt", "r", encoding = 'UTF-8')
           q = readLines(ex, n = 1)
           if (length(q) != 0){
-            tt = file("PF.txt", 'a', encoding = 'UTF-8')
+            tt = file(paste0(name, "F.txt"), 'a', encoding = 'UTF-8')
             writeLines("Python, CE", tt, sep = ",")
             writeLines("-", tt, sep = "\n")
             close(tt)
@@ -1150,7 +1260,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PF.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "F.txt"), 'a', encoding = 'UTF-8')
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -1165,7 +1275,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PF.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "F.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, PD", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1173,7 +1283,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PF.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "F.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1191,7 +1301,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PF.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "F.txt"), 'a', encoding = 'UTF-8')
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -1202,7 +1312,7 @@ function(input, output) {
       ex = file("ex.txt", "r", encoding = 'UTF-8')
       llll = readLines(ex, n = 1)
       if (length(llll) != 0) {
-        tt = file("PF.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "F.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, CE", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -1230,7 +1340,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PF.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "F.txt"), 'a', encoding = 'UTF-8')
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -1245,7 +1355,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PF.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "F.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1253,7 +1363,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PF.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "F.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1268,7 +1378,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PF.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "F.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -1277,15 +1387,18 @@ function(input, output) {
     close(con)
     close(conn)
     close(ra)
-    read.csv("PF.txt", sep = ",", encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+    read.csv(paste0(name, "F.txt"), sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = TRUE)
   output$UF <- renderTable({
-    read.csv("PF.txt", sep = ",", encoding = 'UTF-8')
+    if (input$actionUF == 0) {
+      read.csv(paste0(logi(), "F.txt"), sep = ",", encoding = 'UTF-8')
+    }
   })
   output$UUF <- renderTable({
     FU()
   })
   GU <- eventReactive(input$actionUG, {
+    name = logi()
     con = file(input$fileG$name, "r", encoding = 'UTF-8')
     if (input$programminglanguage == 2) {
       conn = file("1.txt", "w", encoding = 'UTF-8')
@@ -1320,7 +1433,7 @@ function(input, output) {
           ex = file("ex.txt", "r", encoding = 'UTF-8')
           q = readLines(ex, n = 1)
           if (length(q) != 0){
-            tt = file("PG.txt", 'a', encoding = 'UTF-8')
+            tt = file(paste0(name, "G.txt"), 'a', encoding = 'UTF-8')
             writeLines("Python, CE", tt, sep = ",")
             writeLines("-", tt, sep = "\n")
             close(tt)
@@ -1334,7 +1447,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PG.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "G.txt"), 'a', encoding = 'UTF-8')
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -1349,7 +1462,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PG.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "G.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, PD", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1357,7 +1470,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PG.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "G.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1375,7 +1488,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PG.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "G.txt"), 'a', encoding = 'UTF-8')
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -1386,7 +1499,7 @@ function(input, output) {
       ex = file("ex.txt", "r", encoding = 'UTF-8')
       llll = readLines(ex, n = 1)
       if (length(llll) != 0) {
-        tt = file("PG.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "G.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, CE", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -1414,7 +1527,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PG.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "G.txt"), 'a', encoding = 'UTF-8')
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -1429,7 +1542,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PG.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "G.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1437,7 +1550,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PG.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "G.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1452,7 +1565,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PG.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "G.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -1461,15 +1574,18 @@ function(input, output) {
     close(con)
     close(conn)
     close(ra)
-    read.csv("PG.txt", sep = ",", encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+    read.csv(paste0(name, "G.txt"), sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = TRUE)
   output$UG <- renderTable({
-    read.csv("PG.txt", sep = ",", encoding = 'UTF-8')
+    if (input$actionUG == 0) {
+      read.csv(paste0(logi(), "G.txt"), sep = ",", encoding = 'UTF-8')
+    }
   })
   output$UUG <- renderTable({
     GU()
   })
   ZU <- eventReactive(input$actionUZ, {
+    name = logi()
     con = file(input$fileZ$name, "r", encoding = 'UTF-8')
     if (input$programminglanguage == 2) {
       conn = file("1.txt", "w", encoding = 'UTF-8')
@@ -1504,7 +1620,7 @@ function(input, output) {
           ex = file("ex.txt", "r", encoding = 'UTF-8')
           q = readLines(ex, n = 1)
           if (length(q) != 0){
-            tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+            tt = file(paste0(name, "Z.txt"), 'a', encoding = 'UTF-8')
             writeLines("Python, CE", tt, sep = ",")
             writeLines("-", tt, sep = "\n")
             close(tt)
@@ -1518,7 +1634,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "Z.txt"), 'a', encoding = 'UTF-8')
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -1533,7 +1649,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "Z.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, PD", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1541,7 +1657,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "Z.txt"), 'a', encoding = 'UTF-8')
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1559,7 +1675,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "Z.txt"), 'a', encoding = 'UTF-8')
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -1570,7 +1686,7 @@ function(input, output) {
       ex = file("ex.txt", "r", encoding = 'UTF-8')
       llll = readLines(ex, n = 1)
       if (length(llll) != 0) {
-        tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "Z.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, CE", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -1598,7 +1714,7 @@ function(input, output) {
             l = readLines(ra, n = 1)
             if ( length(line2) == 0 ) {
               if (l != ".") {
-                tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+                tt = file(paste0(name, "Z.txt"), 'a', encoding = 'UTF-8')
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
@@ -1613,7 +1729,7 @@ function(input, output) {
               break
             }
             if (l == '.') {
-              tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "Z.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1621,7 +1737,7 @@ function(input, output) {
               break
             }
             if (line2 != l) {
-              tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+              tt = file(paste0(name, "Z.txt"), 'a', encoding = 'UTF-8')
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
@@ -1636,7 +1752,7 @@ function(input, output) {
         }
       }
       if (v == 0) {
-        tt = file("PZ.txt", 'a', encoding = 'UTF-8')
+        tt = file(paste0(name, "Z.txt"), 'a', encoding = 'UTF-8')
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
@@ -1645,10 +1761,12 @@ function(input, output) {
     close(con)
     close(conn)
     close(ra)
-    read.csv("PZ.txt", sep = ",", encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+    read.csv(paste0(name, "Z.txt"), sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = TRUE)
   output$UZ <- renderTable({
-    read.csv("PZ.txt", sep = ",", encoding = 'UTF-8')
+    if (input$actionUZ == 0) {
+      read.csv(paste0(logi(), "Z.txt"), sep = ",", encoding = 'UTF-8')
+    }
   })
   output$UUZ <- renderTable({
     ZU()
@@ -1688,7 +1806,7 @@ function(input, output) {
     close(con)
     close(conn)
     read.csv(input$descriptionA$name, sep = '`', dec = '~', encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+  }, ignoreNULL = TRUE)
   output$TA <- renderTable({
     A()
   })
@@ -1727,7 +1845,7 @@ function(input, output) {
     close(con)
     close(conn)
     read.csv(input$descriptionB$name, sep = '`', dec = '~', encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+  }, ignoreNULL = TRUE)
   output$TB <- renderTable({
     B()
   })
@@ -1766,7 +1884,7 @@ function(input, output) {
     close(con)
     close(conn)
     read.csv(input$descriptionC$name, sep = '`', dec = '~', encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+  }, ignoreNULL = TRUE)
   output$TC <- renderTable({
     C()
   })
@@ -1805,7 +1923,7 @@ function(input, output) {
     close(con)
     close(conn)
     read.csv(input$descriptionD$name, sep = '`', dec = '~', encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+  }, ignoreNULL = TRUE)
   output$TD <- renderTable({
     D()
   })
@@ -1844,7 +1962,7 @@ function(input, output) {
     close(con)
     close(conn)
     read.csv(input$descriptionE$name, sep = '`', dec = '~', encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+  }, ignoreNULL = TRUE)
   output$TE <- renderTable({
     E()
   })
@@ -1883,7 +2001,7 @@ function(input, output) {
     close(con)
     close(conn)
     read.csv(input$descriptionF$name, sep = '`', dec = '~', encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+  }, ignoreNULL = TRUE)
   output$TF <- renderTable({
     ff()
   })
@@ -1922,7 +2040,7 @@ function(input, output) {
     close(con)
     close(conn)
     read.csv(input$descriptionG$name, sep = '`', dec = '~', encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+  }, ignoreNULL = TRUE)
   output$TG <- renderTable({
     G()
   })
@@ -1961,7 +2079,7 @@ function(input, output) {
     close(con)
     close(conn)
     read.csv(input$descriptionZ$name, sep = '`', dec = '~', encoding = 'UTF-8')
-  }, ignoreNULL = FALSE)
+  }, ignoreNULL = TRUE)
   output$TZ <- renderTable({
     Z()
   })
