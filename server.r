@@ -1825,6 +1825,7 @@ function(input, output) {
         musor = readLines(use, n = 1)
         conn = file(paste0(line, "A.txt"), "w", encoding = 'UTF-8')
         writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+        close(conn)
       }
       close(use)
     }
@@ -1877,6 +1878,7 @@ function(input, output) {
         musor = readLines(use, n = 1)
         conn = file(paste0(line, "B.txt"), "w", encoding = 'UTF-8')
         writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+        close(conn)
       }
       close(use)
     }
@@ -1929,6 +1931,7 @@ function(input, output) {
         musor = readLines(use, n = 1)
         conn = file(paste0(line, "C.txt"), "w", encoding = 'UTF-8')
         writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+        close(conn)
       }
       close(use)
     }
@@ -1981,6 +1984,7 @@ function(input, output) {
         musor = readLines(use, n = 1)
         conn = file(paste0(line, "D.txt"), "w", encoding = 'UTF-8')
         writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+        close(conn)
       }
       close(use)
     }
@@ -2033,6 +2037,7 @@ function(input, output) {
         musor = readLines(use, n = 1)
         conn = file(paste0(line, "E.txt"), "w", encoding = 'UTF-8')
         writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+        close(conn)
       }
       close(use)
     }
@@ -2085,6 +2090,7 @@ function(input, output) {
         musor = readLines(use, n = 1)
         conn = file(paste0(line, "F.txt"), "w", encoding = 'UTF-8')
         writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+        close(conn)
       }
       close(use)
     }
@@ -2137,6 +2143,7 @@ function(input, output) {
         musor = readLines(use, n = 1)
         conn = file(paste0(line, "G.txt"), "w", encoding = 'UTF-8')
         writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+        close(conn)
       }
       close(use)
     }
@@ -2189,6 +2196,7 @@ function(input, output) {
         musor = readLines(use, n = 1)
         conn = file(paste0(line, "Z.txt"), "w", encoding = 'UTF-8')
         writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+        close(conn)
       }
       close(use)
     }
