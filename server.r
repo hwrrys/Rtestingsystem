@@ -3,6 +3,8 @@ function(input, output) {
     if (input$login == "Admin"){
       if (input$password == "awdrmki9nj") {
         return("Admin")
+      } else {
+        return("No")
       }
     } else {
       if (input$login == "reg") {
@@ -130,6 +132,7 @@ function(input, output) {
                  fileInput("descriptionA", label = "Description here"),
                  fileInput("testsA", label = "Tests here"),
                  fileInput("AA", label = "Answers here"),
+                 checkboxInput("chA1", label = "Delet all results of users?", value = TRUE),
                  actionButton("actionAA", label = "Add description and tests"),
                  tableOutput('TA'),
                  hr()
@@ -141,6 +144,7 @@ function(input, output) {
                  fileInput("descriptionB", label = "Description here"),
                  fileInput("testsB", label = "Tests here"),
                  fileInput("AB", label = "Answers here"),
+                 checkboxInput("chB1", label = "Delet all results of users?", value = TRUE),
                  actionButton("actionAB", label = "Add description and tests"),
                  tableOutput('TB'),
                  hr()
@@ -152,6 +156,7 @@ function(input, output) {
                  fileInput("descriptionC", label = "Description here"),
                  fileInput("testsC", label = "Tests here"),
                  fileInput("AC", label = "Answers here"),
+                 checkboxInput("chC1", label = "Delet all results of users?", value = TRUE),
                  actionButton("actionAC", label = "Add description and tests"),
                  tableOutput('TC'),
                  hr()
@@ -163,6 +168,7 @@ function(input, output) {
                  fileInput("descriptionD", label = "Description here"),
                  fileInput("testsD", label = "Tests here"),
                  fileInput("AD", label = "Answers here"),
+                 checkboxInput("chD1", label = "Delet all results of users?", value = TRUE),
                  actionButton("actionAD", label = "Add description and tests"),
                  tableOutput('TD'),
                  hr()
@@ -174,6 +180,7 @@ function(input, output) {
                  fileInput("descriptionE", label = "Description here"),
                  fileInput("testsE", label = "Tests here"),
                  fileInput("AE", label = "Answers here"),
+                 checkboxInput("chE1", label = "Delet all results of users?", value = TRUE),
                  actionButton("actionAE", label = "Add description and tests"),
                  tableOutput('TE'),
                  hr()
@@ -185,6 +192,7 @@ function(input, output) {
                  fileInput("descriptionF", label = "Description here"),
                  fileInput("testsF", label = "Tests here"),
                  fileInput("AF", label = "Answers here"),
+                 checkboxInput("chF1", label = "Delet all results of users?", value = TRUE),
                  actionButton("actionAF", label = "Add description and tests"),
                  tableOutput('TF'),
                  hr()
@@ -196,6 +204,7 @@ function(input, output) {
                  fileInput("descriptionG", label = "Description here"),
                  fileInput("testsG", label = "Tests here"),
                  fileInput("AG", label = "Answers here"),
+                 checkboxInput("chG1", label = "Delet all results of users?", value = TRUE),
                  actionButton("actionAG", label = "Add description and tests"),
                  tableOutput('TG'),
                  hr()
@@ -207,6 +216,7 @@ function(input, output) {
                  fileInput("descriptionZ", label = "Description here"),
                  fileInput("testsZ", label = "Tests here"),
                  fileInput("AZ", label = "Answers here"),
+                 checkboxInput("chZ1", label = "Delet all results of users?", value = TRUE),
                  actionButton("actionAZ", label = "Add description and tests"),
                  tableOutput('TZ'),
                  hr()
@@ -1805,6 +1815,19 @@ function(input, output) {
     }
     close(con)
     close(conn)
+    if (input$chA1 == TRUE) {
+      use = file("Users.txt", "r", encoding = 'UTF-8')
+      while (TRUE) {
+        line = readLines(use, n = 1)
+        if (length(line) == 0) {
+          break
+        }
+        musor = readLines(use, n = 1)
+        conn = file(paste0(line, "A.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+      }
+      close(use)
+    }
     read.csv(input$descriptionA$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
   output$TA <- renderTable({
@@ -1844,6 +1867,19 @@ function(input, output) {
     }
     close(con)
     close(conn)
+    if (input$chB1 == TRUE) {
+      use = file("Users.txt", "r", encoding = 'UTF-8')
+      while (TRUE) {
+        line = readLines(use, n = 1)
+        if (length(line) == 0) {
+          break
+        }
+        musor = readLines(use, n = 1)
+        conn = file(paste0(line, "B.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+      }
+      close(use)
+    }
     read.csv(input$descriptionB$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
   output$TB <- renderTable({
@@ -1883,6 +1919,19 @@ function(input, output) {
     }
     close(con)
     close(conn)
+    if (input$chC1 == TRUE) {
+      use = file("Users.txt", "r", encoding = 'UTF-8')
+      while (TRUE) {
+        line = readLines(use, n = 1)
+        if (length(line) == 0) {
+          break
+        }
+        musor = readLines(use, n = 1)
+        conn = file(paste0(line, "C.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+      }
+      close(use)
+    }
     read.csv(input$descriptionC$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
   output$TC <- renderTable({
@@ -1922,6 +1971,19 @@ function(input, output) {
     }
     close(con)
     close(conn)
+    if (input$chD1 == TRUE) {
+      use = file("Users.txt", "r", encoding = 'UTF-8')
+      while (TRUE) {
+        line = readLines(use, n = 1)
+        if (length(line) == 0) {
+          break
+        }
+        musor = readLines(use, n = 1)
+        conn = file(paste0(line, "D.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+      }
+      close(use)
+    }
     read.csv(input$descriptionD$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
   output$TD <- renderTable({
@@ -1961,6 +2023,19 @@ function(input, output) {
     }
     close(con)
     close(conn)
+    if (input$chE1 == TRUE) {
+      use = file("Users.txt", "r", encoding = 'UTF-8')
+      while (TRUE) {
+        line = readLines(use, n = 1)
+        if (length(line) == 0) {
+          break
+        }
+        musor = readLines(use, n = 1)
+        conn = file(paste0(line, "E.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+      }
+      close(use)
+    }
     read.csv(input$descriptionE$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
   output$TE <- renderTable({
@@ -2000,6 +2075,19 @@ function(input, output) {
     }
     close(con)
     close(conn)
+    if (input$chF1 == TRUE) {
+      use = file("Users.txt", "r", encoding = 'UTF-8')
+      while (TRUE) {
+        line = readLines(use, n = 1)
+        if (length(line) == 0) {
+          break
+        }
+        musor = readLines(use, n = 1)
+        conn = file(paste0(line, "F.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+      }
+      close(use)
+    }
     read.csv(input$descriptionF$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
   output$TF <- renderTable({
@@ -2039,6 +2127,19 @@ function(input, output) {
     }
     close(con)
     close(conn)
+    if (input$chG1 == TRUE) {
+      use = file("Users.txt", "r", encoding = 'UTF-8')
+      while (TRUE) {
+        line = readLines(use, n = 1)
+        if (length(line) == 0) {
+          break
+        }
+        musor = readLines(use, n = 1)
+        conn = file(paste0(line, "G.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+      }
+      close(use)
+    }
     read.csv(input$descriptionG$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
   output$TG <- renderTable({
@@ -2078,6 +2179,19 @@ function(input, output) {
     }
     close(con)
     close(conn)
+    if (input$chZ1 == TRUE) {
+      use = file("Users.txt", "r", encoding = 'UTF-8')
+      while (TRUE) {
+        line = readLines(use, n = 1)
+        if (length(line) == 0) {
+          break
+        }
+        musor = readLines(use, n = 1)
+        conn = file(paste0(line, "Z.txt"), "w", encoding = 'UTF-8')
+        writeLines("Pogramminglanguage, Result, Test",conn, sep = "\n")
+      }
+      close(use)
+    }
     read.csv(input$descriptionZ$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
   output$TZ <- renderTable({
