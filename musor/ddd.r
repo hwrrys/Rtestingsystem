@@ -1,0 +1,1 @@
+read.csv("C:/Users/losef/Desktop/1.txt", dec = '`', sep = '~', encoding = 'utf-8')
