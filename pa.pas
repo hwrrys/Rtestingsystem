@@ -1,3 +1,5 @@
 ﻿begin
-  Print(0);
+  var a : int64;
+  Read(a);
+  Print(a+1);
 end.

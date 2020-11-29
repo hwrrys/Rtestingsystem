@@ -1,0 +1,2 @@
+shell.exec("pa.exe")
+

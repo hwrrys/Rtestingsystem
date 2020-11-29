@@ -235,12 +235,26 @@ function(input, output) {
       }
       ll = readLines(con, n = 1)
       if (line == input$plr) {
+        close(con)
         return("This user been registred")
         c = 1
         break
       }
     }
+    close(con)
     if (c == 0) {
+      if (input$plr == 'Task') {
+        c = 1
+        return("This user been registred")
+      }
+      if (input$plr == 'Tests') {
+        c = 1
+        return("This user been registred")
+      }
+      if (input$plr == 'Ans') {
+        c = 1
+        return("This user been registred")
+      }
       if (input$plr == '') {
         c = 1
         return("Enter a non-empty login")
