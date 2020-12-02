@@ -1,7 +1,1 @@
 Pogramminglanguage, Result, Test
-Python, CE,-
-C++, OK,-
-C++, WA,1
-C++, OK,-
-C++, OK,-
-C++, CE,-

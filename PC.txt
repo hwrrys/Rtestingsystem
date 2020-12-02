@@ -1,2 +1,5 @@
 Pogramminglanguage,Вердикт,Тест
 
+C++, OK,-
+C++, WA,1
+C++, WA,2

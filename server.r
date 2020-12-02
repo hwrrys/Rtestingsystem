@@ -1,13 +1,21 @@
 function(input, output) {
   Log <- eventReactive(input$Login, {
-    if (input$login == "Admin"){
-      if (input$password == "awdrmki9nj") {
-        return("Admin")
-      } else {
-        return("No")
-      }
+    print(a)
+    if (a == 1){
+      assign("a", 0, envir = .GlobalEnv)
+      return("No")
+    }
+    if (input$Login == 0){
+      return("No")
     } else {
+      if (input$login == "Admin"){
+        if (input$password == "awdrmki9nj") {
+          assign("a", 1, envir = .GlobalEnv)
+          return("Admin")
+        }
+      }
       if (input$login == "reg") {
+        assign("a", 1, envir = .GlobalEnv)
         return("reg")
       } else {
         us = file("Users.txt", "r", encoding = 'UTF-8')
@@ -19,7 +27,8 @@ function(input, output) {
           }
           passwords = readLines(us, n = 1)
           if (logins == input$login) {
-            if (passwords == input$password) {
+              if (passwords == input$password) {
+              assign("a", 1, envir = .GlobalEnv)
               return("User")
               break
             }
@@ -33,9 +42,12 @@ function(input, output) {
     return(input$login)
   }, ignoreNULL = FALSE)
   output$ui <- renderUI({
-    if (is.null(input$password))
-      return()
     switch(Log(),
+           "No" = mainPanel(
+             h4("if you need to register enter Login: 'reg'"),
+             textInput("login","Login:"),
+             textInput("password","Password:"),
+           ),
            "reg" = mainPanel(
              textInput("plr", label = "enter login"),
              textInput("ppr", label = "enter password"),
@@ -243,6 +255,10 @@ function(input, output) {
     }
     close(con)
     if (c == 0) {
+      if (input$plr == 'Admin') {
+        c = 1
+        return("This user been registred")
+      }
       if (input$plr == 'Task') {
         c = 1
         return("This user been registred")
