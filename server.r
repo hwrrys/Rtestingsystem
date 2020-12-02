@@ -1,7 +1,14 @@
 function(input, output) {
+  Logg <- eventReactive(input$registery, {
+    if (input$registery != 0){
+      assign("rez", "reg", envir = .GlobalEnv)
+      assign("a", 1, envir = .GlobalEnv)
+    }
+  }, ignoreNULL = FALSE)
   Log <- eventReactive(input$Login, {
     print(a)
     if (a == 1){
+      assign("rez", "", envir = .GlobalEnv)
       assign("a", 0, envir = .GlobalEnv)
       return("No")
     }
@@ -14,10 +21,6 @@ function(input, output) {
           return("Admin")
         }
       }
-      if (input$login == "reg") {
-        assign("a", 1, envir = .GlobalEnv)
-        return("reg")
-      } else {
         us = file("Users.txt", "r", encoding = 'UTF-8')
         while (TRUE) {
           logins = readLines(us, n = 1)
@@ -27,7 +30,7 @@ function(input, output) {
           }
           passwords = readLines(us, n = 1)
           if (logins == input$login) {
-              if (passwords == input$password) {
+            if (passwords == input$password) {
               assign("a", 1, envir = .GlobalEnv)
               return("User")
               break
@@ -35,20 +38,31 @@ function(input, output) {
           }
         }
         close(us)
-      }
     }
   }, ignoreNULL = FALSE)
   logi <- eventReactive(input$Login, {
     return(input$login)
   }, ignoreNULL = FALSE)
   output$ui <- renderUI({
-    switch(Log(),
+    Logg()
+    switch(paste0(Log(), rez),
            "No" = mainPanel(
-             h4("if you need to register enter Login: 'reg'"),
              textInput("login","Login:"),
              textInput("password","Password:"),
            ),
-           "reg" = mainPanel(
+           "Noreg" = mainPanel(
+             textInput("plr", label = "enter login"),
+             textInput("ppr", label = "enter password"),
+             actionButton("registerb", label = "Register"),
+             verbatimTextOutput("regt")
+           ),
+           "Userreg" = mainPanel(
+             textInput("plr", label = "enter login"),
+             textInput("ppr", label = "enter password"),
+             actionButton("registerb", label = "Register"),
+             verbatimTextOutput("regt")
+           ),
+           "Adminreg" = mainPanel(
              textInput("plr", label = "enter login"),
              textInput("ppr", label = "enter password"),
              actionButton("registerb", label = "Register"),
