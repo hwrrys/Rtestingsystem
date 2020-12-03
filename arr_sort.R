@@ -34,8 +34,8 @@ spl <- function(a) {
   res[[3]] = strtoi(res[[3]])
   return(res)
 }
-ms <- function(nam,su,st,wb) {
-  con = file("Table_of_results.txt", "r", encoding = 'UTF-8')
+ms <- function(nam,ss,wb) {
+  con = file("C:/Users/losef/Desktop/Rtestingsystem/Table_of_results.txt", "r", encoding = 'UTF-8')
   line = readLines(con, n = 1)
   so = list()
   while(TRUE) {
@@ -46,20 +46,30 @@ ms <- function(nam,su,st,wb) {
     }
     so[[length(so)+1]] = spl(line)
     if (so[[length(so)]][[1]] == nam) {
-      so[[length(so)]][[2]] = so[[length(so)]][[2]]+su
-      so[[length(so)]][[3]] = so[[length(so)]][[3]]+st
-      if (wb != 0) {
-        so[[length(so)]][[3+wb]] = '+'
+      if (ss == 1) {
+        so[[length(so)]][[2]] = so[[length(so)]][[2]]+1
+        if (nchar(so[[length(so)]][[3+wb]]) == 1) {
+          so[[length(so)]][[3+wb]] = '+'
+        } else {
+          so[[length(so)]][[3]] = so[[length(so)]][[3]]+strtoi(substring(so[[length(so)]][[3+wb]],2,nchar(so[[length(so)]][[3+wb]])))
+          so[[length(so)]][[3+wb]] = paste0('+',strtoi(substring(so[[length(so)]][[3+wb]],2,nchar(so[[length(so)]][[3+wb]]))))
+        }
+      } else {
+        if (nchar(so[[length(so)]][[3+wb]]) == 1) {
+          print(1)
+          so[[length(so)]][[3+wb]] = paste0('-',1)
+        } else {
+          print(2)
+          so[[length(so)]][[3+wb]] = paste0('-',strtoi(substring(so[[length(so)]][[3+wb]],2,nchar(so[[length(so)]][[3+wb]])))+1)
+        }
       }
     }
   }
   so = arr_sort(so)
-  conn = file("Table_of_results.txt", "w", encoding = 'UTF-8')
+  conn = file("C:/Users/losef/Desktop/Rtestingsystem/Table_of_results.txt", "w", encoding = 'UTF-8')
   writeLines("Name,Summ,Fine,A,B,C,D,E,F,G,Z",conn, sep = "\n")
   for (i in 1:(length(so))) {
-    print(so[[i]])
     for (j in 1:(length(so[[i]]))) {
-      print(so[[i]][[j]])
       if (j != length(so[[i]])) {
         writeLines(paste0(so[[i]][[j]],''),conn, sep = ",")
       } else {
@@ -69,6 +79,6 @@ ms <- function(nam,su,st,wb) {
   }
   close(conn)
 }
-ms('greengolddog',0,0,0)
-read.csv("Table_of_results.txt", sep = ",", encoding = 'UTF-8')
+ms('P',1,2)
+read.csv("C:/Users/losef/Desktop/Rtestingsystem/Table_of_results.txt", sep = ",", encoding = 'UTF-8')
 
