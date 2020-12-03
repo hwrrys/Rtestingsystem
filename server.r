@@ -669,6 +669,7 @@ function(input, output) {
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,2)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -684,6 +685,7 @@ function(input, output) {
               writeLines("Python, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,2)
               v = 1
               break
             }
@@ -692,6 +694,7 @@ function(input, output) {
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,2)
               v = 1
               break
             }
@@ -710,6 +713,7 @@ function(input, output) {
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,2)
       }
     } else {
       shell.exec("co++.bat")
@@ -749,6 +753,7 @@ function(input, output) {
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,2)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -764,6 +769,7 @@ function(input, output) {
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,2)
               v = 1
               break
             }
@@ -772,6 +778,7 @@ function(input, output) {
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,2)
               v = 1
               break
             }
@@ -787,6 +794,7 @@ function(input, output) {
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,2)
       }
     }
     close(con)
@@ -856,6 +864,7 @@ function(input, output) {
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,3)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -871,6 +880,7 @@ function(input, output) {
               writeLines("Python, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,3)
               v = 1
               break
             }
@@ -879,6 +889,7 @@ function(input, output) {
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,3)
               v = 1
               break
             }
@@ -897,6 +908,7 @@ function(input, output) {
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,3)
       }
     } else {
       shell.exec("co++.bat")
@@ -936,6 +948,7 @@ function(input, output) {
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,3)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -951,6 +964,7 @@ function(input, output) {
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,3)
               v = 1
               break
             }
@@ -959,6 +973,7 @@ function(input, output) {
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,3)
               v = 1
               break
             }
@@ -974,6 +989,7 @@ function(input, output) {
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,3)
       }
     }
     close(con)
@@ -1043,6 +1059,7 @@ function(input, output) {
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,4)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -1055,9 +1072,10 @@ function(input, output) {
             }
             if (l == '.') {
               tt = file(paste0(name, "D.txt"), 'a', encoding = 'UTF-8')
-              writeLines("Python, PD", tt, sep = ",")
+              writeLines("Python, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,4)
               v = 1
               break
             }
@@ -1066,6 +1084,7 @@ function(input, output) {
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,4)
               v = 1
               break
             }
@@ -1084,6 +1103,7 @@ function(input, output) {
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,4)
       }
     } else {
       shell.exec("co++.bat")
@@ -1123,6 +1143,7 @@ function(input, output) {
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,4)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -1138,6 +1159,7 @@ function(input, output) {
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,4)
               v = 1
               break
             }
@@ -1146,6 +1168,7 @@ function(input, output) {
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,4)
               v = 1
               break
             }
@@ -1161,6 +1184,7 @@ function(input, output) {
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,4)
       }
     }
     close(con)
@@ -1230,6 +1254,7 @@ function(input, output) {
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,5)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -1242,9 +1267,10 @@ function(input, output) {
             }
             if (l == '.') {
               tt = file(paste0(name, "E.txt"), 'a', encoding = 'UTF-8')
-              writeLines("Python, PD", tt, sep = ",")
+              writeLines("Python, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,5)
               v = 1
               break
             }
@@ -1253,6 +1279,7 @@ function(input, output) {
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,5)
               v = 1
               break
             }
@@ -1271,6 +1298,7 @@ function(input, output) {
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,5)
       }
     } else {
       shell.exec("co++.bat")
@@ -1310,6 +1338,7 @@ function(input, output) {
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,5)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -1325,6 +1354,7 @@ function(input, output) {
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,5)
               v = 1
               break
             }
@@ -1333,6 +1363,7 @@ function(input, output) {
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,5)
               v = 1
               break
             }
@@ -1348,6 +1379,7 @@ function(input, output) {
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,5)
       }
     }
     close(con)
@@ -1417,6 +1449,7 @@ function(input, output) {
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,6)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -1429,9 +1462,10 @@ function(input, output) {
             }
             if (l == '.') {
               tt = file(paste0(name, "F.txt"), 'a', encoding = 'UTF-8')
-              writeLines("Python, PD", tt, sep = ",")
+              writeLines("Python, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,6)
               v = 1
               break
             }
@@ -1440,6 +1474,7 @@ function(input, output) {
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,6)
               v = 1
               break
             }
@@ -1458,6 +1493,7 @@ function(input, output) {
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,6)
       }
     } else {
       shell.exec("co++.bat")
@@ -1497,6 +1533,7 @@ function(input, output) {
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,6)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -1512,6 +1549,7 @@ function(input, output) {
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,6)
               v = 1
               break
             }
@@ -1520,6 +1558,7 @@ function(input, output) {
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,6)
               v = 1
               break
             }
@@ -1535,6 +1574,7 @@ function(input, output) {
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,6)
       }
     }
     close(con)
@@ -1604,6 +1644,7 @@ function(input, output) {
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,7)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -1616,9 +1657,10 @@ function(input, output) {
             }
             if (l == '.') {
               tt = file(paste0(name, "G.txt"), 'a', encoding = 'UTF-8')
-              writeLines("Python, PD", tt, sep = ",")
+              writeLines("Python, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,7)
               v = 1
               break
             }
@@ -1627,6 +1669,7 @@ function(input, output) {
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,7)
               v = 1
               break
             }
@@ -1645,6 +1688,7 @@ function(input, output) {
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,7)
       }
     } else {
       shell.exec("co++.bat")
@@ -1684,6 +1728,7 @@ function(input, output) {
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,7)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -1699,6 +1744,7 @@ function(input, output) {
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,7)
               v = 1
               break
             }
@@ -1707,6 +1753,7 @@ function(input, output) {
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,7)
               v = 1
               break
             }
@@ -1722,6 +1769,7 @@ function(input, output) {
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,7)
       }
     }
     close(con)
@@ -1791,6 +1839,7 @@ function(input, output) {
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,8)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -1803,9 +1852,10 @@ function(input, output) {
             }
             if (l == '.') {
               tt = file(paste0(name, "Z.txt"), 'a', encoding = 'UTF-8')
-              writeLines("Python, PD", tt, sep = ",")
+              writeLines("Python, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,8)
               v = 1
               break
             }
@@ -1814,6 +1864,7 @@ function(input, output) {
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,8)
               v = 1
               break
             }
@@ -1832,6 +1883,7 @@ function(input, output) {
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,8)
       }
     } else {
       shell.exec("co++.bat")
@@ -1871,6 +1923,7 @@ function(input, output) {
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,8)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -1886,6 +1939,7 @@ function(input, output) {
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,8)
               v = 1
               break
             }
@@ -1894,6 +1948,7 @@ function(input, output) {
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,8)
               v = 1
               break
             }
@@ -1909,6 +1964,7 @@ function(input, output) {
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,8)
       }
     }
     close(con)
