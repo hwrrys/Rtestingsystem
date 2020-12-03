@@ -80,6 +80,39 @@ function(input, output) {
     }
     close(conn)
   }
+  ud<- function(za) {
+    con = file("Table_of_results.txt", "r", encoding = 'UTF-8')
+    line = readLines(con, n = 1)
+    so = list()
+    while(TRUE) {
+      line = readLines(con, n = 1)
+      if (length(line) == 0){
+        close(con)
+        break
+      }
+      so[[length(so)+1]] = spl(line)
+      if (substring(so[[length(so)]][[3+za]],1,1) == '+'){
+        so[[length(so)]][[2]] = so[[length(so)]][[2]] - 1
+        if (nchar(so[[length(so)]][[3+za]]) != 1) {
+          so[[length(so)]][[3]] = so[[length(so)]][[3]] - strtoi(substring(so[[length(so)]][[3+za]],2,nchar(so[[length(so)]][[3+za]])))
+        }
+      }
+      so[[length(so)]][[3+za]] = '-'
+    }
+    so = arr_sort(so)
+    conn = file("Table_of_results.txt", "w", encoding = 'UTF-8')
+    writeLines("Name,Summ,Fine,A,B,C,D,E,F,G,Z",conn, sep = "\n")
+    for (i in 1:(length(so))) {
+      for (j in 1:(length(so[[i]]))) {
+        if (j != length(so[[i]])) {
+          writeLines(paste0(so[[i]][[j]],''),conn, sep = ",")
+        } else {
+          writeLines(paste0(so[[i]][[j]],''),conn, sep = "\n")
+        }
+      }
+    }
+    close(conn)
+  }
   Logg <- eventReactive(input$registery, {
     if (input$registery != 0){
       assign("rez", "reg", envir = .GlobalEnv)
@@ -237,7 +270,8 @@ function(input, output) {
                )
              ),
            )),
-           "Admin" =tabsetPanel(
+           "Admin" = mainPanel(
+            tabsetPanel(
              type = "tabs",
              tabPanel(
                "Task A",
@@ -334,8 +368,15 @@ function(input, output) {
                  tableOutput('TZ'),
                  hr()
                ),
+             ),
+             tabPanel(
+               "Table of results",
+               actionButton("TaU", label = "Update Table"),
+               tableOutput("tab_res"),
+               hr()
              )
            )
+          )
     )
   })
   reeeg <- eventReactive(input$registerb, {
@@ -2027,6 +2068,7 @@ function(input, output) {
         close(conn)
       }
       close(use)
+      ud(1)
     }
     read.csv(input$descriptionA$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
@@ -2080,6 +2122,7 @@ function(input, output) {
         close(conn)
       }
       close(use)
+      ud(2)
     }
     read.csv(input$descriptionB$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
@@ -2133,6 +2176,7 @@ function(input, output) {
         close(conn)
       }
       close(use)
+      ud(3)
     }
     read.csv(input$descriptionC$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
@@ -2186,6 +2230,7 @@ function(input, output) {
         close(conn)
       }
       close(use)
+      ud(4)
     }
     read.csv(input$descriptionD$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
@@ -2239,6 +2284,7 @@ function(input, output) {
         close(conn)
       }
       close(use)
+      ud(5)
     }
     read.csv(input$descriptionE$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
@@ -2292,6 +2338,7 @@ function(input, output) {
         close(conn)
       }
       close(use)
+      ud(6)
     }
     read.csv(input$descriptionF$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
@@ -2345,6 +2392,7 @@ function(input, output) {
         close(conn)
       }
       close(use)
+      ud(7)
     }
     read.csv(input$descriptionG$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)
@@ -2398,6 +2446,7 @@ function(input, output) {
         close(conn)
       }
       close(use)
+      ud(8)
     }
     read.csv(input$descriptionZ$name, sep = '`', dec = '~', encoding = 'UTF-8')
   }, ignoreNULL = TRUE)

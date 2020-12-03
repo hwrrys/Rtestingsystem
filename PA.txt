@@ -1,9 +1,1 @@
 Pogramminglanguage, Result, Test
-Python, OK,-
-Python, OK,-
-Python, WA,1
-Python, CE,-
-Python, CE,-
-Python, WA,1
-Python, OK,-
-Python, WA,2

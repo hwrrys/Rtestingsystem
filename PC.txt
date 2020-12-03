@@ -1,5 +1,3 @@
-Pogramminglanguage,Вердикт,Тест
-
+Pogramminglanguage, Result, Test
+Python, CE,-
 C++, OK,-
-C++, WA,1
-C++, WA,2

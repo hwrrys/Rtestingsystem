@@ -34,7 +34,7 @@ spl <- function(a) {
   res[[3]] = strtoi(res[[3]])
   return(res)
 }
-ms <- function(nam,ss,wb) {
+ud<- function(za) {
   con = file("C:/Users/losef/Desktop/Rtestingsystem/Table_of_results.txt", "r", encoding = 'UTF-8')
   line = readLines(con, n = 1)
   so = list()
@@ -45,25 +45,13 @@ ms <- function(nam,ss,wb) {
       break
     }
     so[[length(so)+1]] = spl(line)
-    if (so[[length(so)]][[1]] == nam) {
-      if (ss == 1) {
-        so[[length(so)]][[2]] = so[[length(so)]][[2]]+1
-        if (nchar(so[[length(so)]][[3+wb]]) == 1) {
-          so[[length(so)]][[3+wb]] = '+'
-        } else {
-          so[[length(so)]][[3]] = so[[length(so)]][[3]]+strtoi(substring(so[[length(so)]][[3+wb]],2,nchar(so[[length(so)]][[3+wb]])))
-          so[[length(so)]][[3+wb]] = paste0('+',strtoi(substring(so[[length(so)]][[3+wb]],2,nchar(so[[length(so)]][[3+wb]]))))
-        }
-      } else {
-        if (nchar(so[[length(so)]][[3+wb]]) == 1) {
-          print(1)
-          so[[length(so)]][[3+wb]] = paste0('-',1)
-        } else {
-          print(2)
-          so[[length(so)]][[3+wb]] = paste0('-',strtoi(substring(so[[length(so)]][[3+wb]],2,nchar(so[[length(so)]][[3+wb]])))+1)
-        }
+    if (substring(so[[length(so)]][[3+za]],1,1) == '+'){
+      so[[length(so)]][[2]] = so[[length(so)]][[2]] - 1
+      if (nchar(so[[length(so)]][[3+za]]) != 1) {
+        so[[length(so)]][[3]] = so[[length(so)]][[3]] - strtoi(substring(so[[length(so)]][[3+za]],2,nchar(so[[length(so)]][[3+za]])))
       }
     }
+    so[[length(so)]][[3+za]] = '-'
   }
   so = arr_sort(so)
   conn = file("C:/Users/losef/Desktop/Rtestingsystem/Table_of_results.txt", "w", encoding = 'UTF-8')
@@ -79,6 +67,7 @@ ms <- function(nam,ss,wb) {
   }
   close(conn)
 }
-ms('P',1,2)
+ud(1)
 read.csv("C:/Users/losef/Desktop/Rtestingsystem/Table_of_results.txt", sep = ",", encoding = 'UTF-8')
+
 
