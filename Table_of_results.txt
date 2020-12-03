@@ -1,0 +1,6 @@
+Name,Summ,Fine,A,B,C,D,E,F,G,Z
+qwerti,1,0,+,-,-,-,-,-,-,-
+greengolddog,1,1,+,-,-,-,-,-,-,-
+P,0,0,-,-,-,-,-,-,-,-
+Hwrrys,0,0,-,-,-,-,-,-,-,-
+AndreyKurbatov,0,0,-,-,-,-,-,-,-,-

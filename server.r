@@ -1,4 +1,75 @@
 function(input, output) {
+  arr_sort <- function(c) {
+    i = length(c)-1
+    while(i > 0) {
+      for (j in 1:i) {
+        if (c[[j]][[2]] < c[[j+1]][[2]]){
+          x = c[j]
+          c[j] = c[j+1]
+          c[j+1] = x
+        } else if (c[[j]][[2]] == c[[j+1]][[2]]){
+          if (c[[j]][[3]] > c[[j+1]][[3]]){
+            x = c[j]
+            c[j] = c[j+1]
+            c[j+1] = x
+          }
+        }
+      }
+      i = i - 1
+    }
+    return(c)
+  }
+  spl <- function(a) {
+    s = ''
+    res = list()
+    for (i in 1:nchar(a)){
+      if (substring(a, i, i) == ',') {
+        res = c(res, list(s))
+        s = ''
+      } else {
+        s = paste0(s, substring(a, i, i))
+      }
+    }
+    res = c(res, list(s))
+    res[[2]] = strtoi(res[[2]])
+    res[[3]] = strtoi(res[[3]])
+    return(res)
+  }
+  ms <- function(nam,su,st,wb) {
+    con = file("Table_of_results.txt", "r", encoding = 'UTF-8')
+    line = readLines(con, n = 1)
+    so = list()
+    while(TRUE) {
+      line = readLines(con, n = 1)
+      if (length(line) == 0){
+        close(con)
+        break
+      }
+      so[[length(so)+1]] = spl(line)
+      if (so[[length(so)]][[1]] == nam) {
+        so[[length(so)]][[2]] = so[[length(so)]][[2]]+su
+        so[[length(so)]][[3]] = so[[length(so)]][[3]]+st
+        if (wb != 0) {
+          so[[length(so)]][[3+wb]] = '+'
+        }
+      }
+    }
+    so = arr_sort(so)
+    conn = file("Table_of_results.txt", "w", encoding = 'UTF-8')
+    writeLines("Name,Summ,Fine,A,B,C,D,E,F,G,Z",conn, sep = "\n")
+    for (i in 1:(length(so))) {
+      print(so[[i]])
+      for (j in 1:(length(so[[i]]))) {
+        print(so[[i]][[j]])
+        if (j != length(so[[i]])) {
+          writeLines(paste0(so[[i]][[j]],''),conn, sep = ",")
+        } else {
+          writeLines(paste0(so[[i]][[j]],''),conn, sep = "\n")
+        }
+      }
+    }
+    close(conn)
+  }
   Logg <- eventReactive(input$registery, {
     if (input$registery != 0){
       assign("rez", "reg", envir = .GlobalEnv)
@@ -146,6 +217,12 @@ function(input, output) {
                  actionButton("actionUZ", label = "Check"),
                  tableOutput('UUZ'),
                  tableOutput("UZ"),
+                 hr()
+               ),
+               tabPanel(
+                 "Table of results",
+                 actionButton("TaU", label = "Update Table"),
+                 tableOutput("tab_res"),
                  hr()
                )
              ),
@@ -298,6 +375,9 @@ function(input, output) {
         writeLines(input$plr,con, sep = "\n")
         writeLines(input$ppr,con, sep = "\n")
         close(con)
+        con = file("Table_of_results.txt", "a", encoding = 'UTF-8')
+        writeLines(paste0(input$plr, ",0,0,-,-,-,-,-,-,-,-"),con, sep = "\n")
+        close(con)
         FA = file(paste0(input$plr, "A.txt"), "w", encoding = 'UTF-8')
         writeLines("Pogramminglanguage, Result, Test",con, sep = "\n")
         close(FA)
@@ -322,6 +402,7 @@ function(input, output) {
         FA = file(paste0(input$plr, "Z.txt"), "w", encoding = 'UTF-8')
         writeLines("Pogramminglanguage, Result, Test",con, sep = "\n")
         close(FA)
+        assign("rez", "", envir = .GlobalEnv)
         return(paste0("Registeation was successful and you registerd with name ", input$plr))
       }
     }
@@ -383,6 +464,7 @@ function(input, output) {
                 writeLines("Python, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,1,0)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -398,6 +480,7 @@ function(input, output) {
               writeLines("Python, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,1,0)
               v = 1
               break
             }
@@ -406,6 +489,7 @@ function(input, output) {
               writeLines("Python, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,1,0)
               v = 1
               break
             }
@@ -424,6 +508,7 @@ function(input, output) {
         writeLines("Python, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,0,1)
       }
     } else {
       shell.exec("co++.bat")
@@ -463,6 +548,7 @@ function(input, output) {
                 writeLines("C++, PE", tt, sep = ",")
                 writeLines(paste0('',t), tt, sep = "\n")
                 close(tt)
+                ms(name,0,1,0)
                 v = 1
                 while (TRUE) {
                   lo = readLines(ra, n = 1)
@@ -478,6 +564,7 @@ function(input, output) {
               writeLines("C++, PE", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,1,0)
               v = 1
               break
             }
@@ -486,6 +573,7 @@ function(input, output) {
               writeLines("C++, WA", tt, sep = ",")
               writeLines(paste0('',t), tt, sep = "\n")
               close(tt)
+              ms(name,0,1,0)
               v = 1
               break
             }
@@ -501,6 +589,7 @@ function(input, output) {
         writeLines("C++, OK", tt, sep = ",")
         writeLines("-", tt, sep = "\n")
         close(tt)
+        ms(name,1,0,1)
       }
     }
     close(con)
@@ -2336,5 +2425,11 @@ function(input, output) {
       print(line)
     }
     close(con)
+  })
+  TabU <- eventReactive(input$TaU, {
+    read.csv("Table_of_results.txt", sep = ",", encoding = 'UTF-8')
+  }, ignoreNULL = FALSE)
+  output$tab_res <- renderTable({
+    TabU()
   })
 }

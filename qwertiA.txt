@@ -1,3 +1,2 @@
 Pogramminglanguage, Result, Test
-Python, WA,2
 Python, OK,-
