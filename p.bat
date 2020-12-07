@@ -1,2 +1,2 @@
-python 1.txt < in.txt > out.txt 2> ex.txt
-
+start   /b cm.bat
+start  cmd.exe /c run.bat

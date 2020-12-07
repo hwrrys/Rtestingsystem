@@ -194,7 +194,7 @@ function(input, output) {
                  "Task A",
                  verbatimTextOutput("valueA"),
                  fileInput("fileA", label = h3("Put Your Code Here")),
-                 actionButton("actionUA", label = "Check"),
+                 actionButton("actionUA", label = "Check", icon("paper-plane")),
                  tableOutput('UUA'),
                  tableOutput("UA"),
                  hr()
@@ -203,7 +203,7 @@ function(input, output) {
                  "Task B",
                  verbatimTextOutput("valueB"),
                  fileInput("fileB", label = h3("Put Your Code Here")),
-                 actionButton("actionUB", label = "Check"),
+                 actionButton("actionUB", label = "Check", icon("paper-plane")),
                  tableOutput('UUB'),
                  tableOutput("UB"),
                  hr()
@@ -212,7 +212,7 @@ function(input, output) {
                  "Task C",
                  verbatimTextOutput("valueC"),
                  fileInput("fileC", label = h3("Put Your Code Here")),
-                 actionButton("actionUC", label = "Check"),
+                 actionButton("actionUC", label = "Check", icon("paper-plane")),
                  tableOutput('UUC'),
                  tableOutput("UC"),
                  hr()
@@ -221,7 +221,7 @@ function(input, output) {
                  "Task D",
                  verbatimTextOutput("valueD"),
                  fileInput("fileD", label = h3("Put Your Code Here")),
-                 actionButton("actionUD", label = "Check"),
+                 actionButton("actionUD", label = "Check", icon("paper-plane")),
                  tableOutput('UUD'),
                  tableOutput("UD"),
                  hr()
@@ -230,7 +230,7 @@ function(input, output) {
                  "Task E",
                  verbatimTextOutput("valueE"),
                  fileInput("fileE", label = h3("Put Your Code Here")),
-                 actionButton("actionUE", label = "Check"),
+                 actionButton("actionUE", label = "Check", icon("paper-plane")),
                  tableOutput('UUE'),
                  tableOutput("UE"),
                  hr()
@@ -239,7 +239,7 @@ function(input, output) {
                  "Task F",
                  verbatimTextOutput("valueF"),
                  fileInput("fileF", label = h3("Put Your Code Here")),
-                 actionButton("actionUF", label = "Check"),
+                 actionButton("actionUF", label = "Check", icon("paper-plane")),
                  tableOutput('UUF'),
                  tableOutput("UF"),
                  hr()
@@ -248,7 +248,7 @@ function(input, output) {
                  "Task G",
                  verbatimTextOutput("valueG"),
                  fileInput("fileG", label = h3("Put Your Code Here")),
-                 actionButton("actionUG", label = "Check"),
+                 actionButton("actionUG", label = "Check", icon("paper-plane")),
                  tableOutput('UUG'),
                  tableOutput("UG"),
                  hr()
@@ -257,15 +257,15 @@ function(input, output) {
                  "Task Z",
                  verbatimTextOutput("valueZ"),
                  fileInput("fileZ", label = h3("Put Your Code Here")),
-                 actionButton("actionUZ", label = "Check"),
+                 actionButton("actionUZ", label = "Check", icon("paper-plane")),
                  tableOutput('UUZ'),
                  tableOutput("UZ"),
                  hr()
                ),
                tabPanel(
                  "Table of results",
-                 actionButton("TaU", label = "Update Table"),
                  tableOutput("tab_res"),
+                 actionButton("TaU", label = "Update Table"),
                  hr()
                )
              ),
@@ -371,12 +371,12 @@ function(input, output) {
              ),
              tabPanel(
                "Table of results",
-               actionButton("TaU", label = "Update Table"),
                tableOutput("tab_res"),
+               actionButton("TaU", label = "Update Table"),
                hr()
              )
            )
-          )
+      )
     )
   })
   reeeg <- eventReactive(input$registerb, {
