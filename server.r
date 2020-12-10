@@ -464,6 +464,20 @@ function(input, output) {
         close(tx)
         tx = file(paste0(input$plr, "ex.txt"), "w", encoding = 'UTF-8')
         close(tx)
+        bp = file(paste0(input$plr, "c++.bat"), "w", encoding = 'UTF-8')
+        writeLines("set PATH=mingw64\bin;%PATH%",bp, sep = "\n")
+        writeLines("rem echo %PATH%",bp, sep = "\n")
+        writeLines('rem cd "mingw64\bin"\ ',bp, sep = "\n")
+        writeLines(paste0(input$plr, paste0("a.exe > ", paste0(input$plr, paste0("out.txt < ", paste0(input$plr, paste0("in.txt 2> ", paste0(input$plr, "ex.txt"))))))), bp, sep = "\n")
+        close(bp)
+        bp = file(paste0(input$plr, "co++.bat"), "w", encoding = 'UTF-8')
+        writeLines("set PATH=mingw64\bin;%PATH%",bp, sep = "\n")
+        writeLines("rem echo %PATH%",bp, sep = "\n")
+        writeLines('rem cd "mingw64\bin"\ ',bp, sep = "\n")
+        writeLines(paste0("g++ ", paste0(input$plr, paste0("1c.cpp > ", paste0(input$plr, paste0("a.exe < ", paste0(input$plr, "ex.txt")))))), bp, sep = "\n")
+        close(bp)
+        tx = file(paste0(input$plr, "1c.cpp"), "w", encoding = 'UTF-8')
+        close(tx)
         assign("rez", "", envir = .GlobalEnv)
         return(paste0("Registeation was successful and you registerd with name ", input$plr))
       }
@@ -478,7 +492,7 @@ function(input, output) {
     if (input$programminglanguage == 2) {
       conn = file(paste0(input$plr, "1.txt"), "w", encoding = 'UTF-8')
     } else {
-      conn = file("1c.cpp", "w", encoding = 'UTF-8')
+      conn = file(paste0(input$plr, "1c.cpp"), "w", encoding = 'UTF-8')
     }
     while ( TRUE ) {
       line = readLines(con, n = 1)
@@ -508,10 +522,18 @@ function(input, output) {
           ex = file(paste0(input$plr, "ex.txt"), "r", encoding = 'UTF-8')
           q = readLines(ex, n = 1)
           if (length(q) != 0){
-            tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
-            writeLines("Python, CE", tt, sep = ",")
-            writeLines("-", tt, sep = "\n")
-            close(tt)
+            if (t == 1) {
+              tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
+              writeLines("Python, CE", tt, sep = ",")
+              writeLines("-", tt, sep = "\n")
+              close(tt)
+            } else {
+              tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
+              writeLines("Python, RT", tt, sep = ",")
+              writeLines(paste0(t, ""), tt, sep = "\n")
+              close(tt)
+              ms(name,0,1)
+            }
             v = 1
             break
           }
