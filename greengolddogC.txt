@@ -1,3 +1,1 @@
 Pogramminglanguage, Result, Test
-Python, CE,-
-C++, OK,-

@@ -1,1 +1,1 @@
-Pogramminglanguage,Вердикт,Тест
+Pogramminglanguage, Result, Test

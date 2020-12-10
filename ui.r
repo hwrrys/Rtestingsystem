@@ -12,7 +12,7 @@ fluidPage(
                selected = 2),
   mainPanel(
     actionButton("registery", label = "I need to register"),
-    actionButton("Login", label = "Login/Logout")
+    actionButton("Login", label = "Login/Logout", icon("arrow-left"))
   ),
   #style="color: #fff; background-color: #fff; border-color: #fff")
   uiOutput("ui")

@@ -1,1 +1,0 @@
-python 1.txt < in.txt > out.txt 2> ex.txt

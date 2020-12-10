@@ -1,3 +1,1 @@
 Pogramminglanguage, Result, Test
-C++, OK,-
-C++, CE,-

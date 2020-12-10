@@ -1,2 +1,1 @@
-Pogramminglanguage,Вердикт,Тест
-C++, OK,-
+Pogramminglanguage, Result, Test

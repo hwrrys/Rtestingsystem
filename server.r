@@ -265,7 +265,7 @@ function(input, output) {
                tabPanel(
                  "Table of results",
                  tableOutput("tab_res"),
-                 actionButton("TaU", label = "Update Table"),
+                 actionButton("TaU", label = "Update Table", icon("sync")),
                  hr()
                )
              ),
@@ -280,7 +280,7 @@ function(input, output) {
                  fileInput("testsA", label = "Tests here"),
                  fileInput("AA", label = "Answers here"),
                  checkboxInput("chA1", label = "Delet all results of users?", value = TRUE),
-                 actionButton("actionAA", label = "Add description and tests"),
+                 actionButton("actionAA", label = "Add description and tests", icon("sync")),
                  tableOutput('TA'),
                  hr()
                ),
@@ -292,7 +292,7 @@ function(input, output) {
                  fileInput("testsB", label = "Tests here"),
                  fileInput("AB", label = "Answers here"),
                  checkboxInput("chB1", label = "Delet all results of users?", value = TRUE),
-                 actionButton("actionAB", label = "Add description and tests"),
+                 actionButton("actionAB", label = "Add description and tests", icon("sync")),
                  tableOutput('TB'),
                  hr()
                ),
@@ -304,7 +304,7 @@ function(input, output) {
                  fileInput("testsC", label = "Tests here"),
                  fileInput("AC", label = "Answers here"),
                  checkboxInput("chC1", label = "Delet all results of users?", value = TRUE),
-                 actionButton("actionAC", label = "Add description and tests"),
+                 actionButton("actionAC", label = "Add description and tests", icon("sync")),
                  tableOutput('TC'),
                  hr()
                ),
@@ -316,7 +316,7 @@ function(input, output) {
                  fileInput("testsD", label = "Tests here"),
                  fileInput("AD", label = "Answers here"),
                  checkboxInput("chD1", label = "Delet all results of users?", value = TRUE),
-                 actionButton("actionAD", label = "Add description and tests"),
+                 actionButton("actionAD", label = "Add description and tests", icon("sync")),
                  tableOutput('TD'),
                  hr()
                ),
@@ -328,7 +328,7 @@ function(input, output) {
                  fileInput("testsE", label = "Tests here"),
                  fileInput("AE", label = "Answers here"),
                  checkboxInput("chE1", label = "Delet all results of users?", value = TRUE),
-                 actionButton("actionAE", label = "Add description and tests"),
+                 actionButton("actionAE", label = "Add description and tests", icon("sync")),
                  tableOutput('TE'),
                  hr()
                ),
@@ -340,7 +340,7 @@ function(input, output) {
                  fileInput("testsF", label = "Tests here"),
                  fileInput("AF", label = "Answers here"),
                  checkboxInput("chF1", label = "Delet all results of users?", value = TRUE),
-                 actionButton("actionAF", label = "Add description and tests"),
+                 actionButton("actionAF", label = "Add description and tests", icon("sync")),
                  tableOutput('TF'),
                  hr()
                ),
@@ -352,7 +352,7 @@ function(input, output) {
                  fileInput("testsG", label = "Tests here"),
                  fileInput("AG", label = "Answers here"),
                  checkboxInput("chG1", label = "Delet all results of users?", value = TRUE),
-                 actionButton("actionAG", label = "Add description and tests"),
+                 actionButton("actionAG", label = "Add description and tests", icon("sync")),
                  tableOutput('TG'),
                  hr()
                ),
@@ -364,7 +364,7 @@ function(input, output) {
                  fileInput("testsZ", label = "Tests here"),
                  fileInput("AZ", label = "Answers here"),
                  checkboxInput("chZ1", label = "Delet all results of users?", value = TRUE),
-                 actionButton("actionAZ", label = "Add description and tests"),
+                 actionButton("actionAZ", label = "Add description and tests", icon("sync")),
                  tableOutput('TZ'),
                  hr()
                ),
@@ -372,7 +372,7 @@ function(input, output) {
              tabPanel(
                "Table of results",
                tableOutput("tab_res"),
-               actionButton("TaU", label = "Update Table"),
+               actionButton("TaU", label = "Update Table", icon("sync")),
                hr()
              )
            )
@@ -453,6 +453,17 @@ function(input, output) {
         FA = file(paste0(input$plr, "Z.txt"), "w", encoding = 'UTF-8')
         writeLines("Pogramminglanguage, Result, Test",con, sep = "\n")
         close(FA)
+        bp = file(paste0(input$plr, "p.bat"), "w", encoding = 'UTF-8')
+        writeLines(paste0("python ", paste0(input$plr, paste0("1.txt > ", paste0(input$plr, paste0("out.txt < ", paste0(input$plr, paste0("in.txt 2> ", paste0(input$plr, "ex.txt")))))))), bp, sep = "\n")
+        close(bp)
+        tx = file(paste0(input$plr, "1.txt"), "w", encoding = 'UTF-8')
+        close(tx)
+        tx = file(paste0(input$plr, "out.txt"), "w", encoding = 'UTF-8')
+        close(tx)
+        tx = file(paste0(input$plr, "in.txt"), "w", encoding = 'UTF-8')
+        close(tx)
+        tx = file(paste0(input$plr, "ex.txt"), "w", encoding = 'UTF-8')
+        close(tx)
         assign("rez", "", envir = .GlobalEnv)
         return(paste0("Registeation was successful and you registerd with name ", input$plr))
       }
@@ -465,7 +476,7 @@ function(input, output) {
     name = logi()
     con = file(input$fileA$name, "r", encoding = 'UTF-8')
     if (input$programminglanguage == 2) {
-      conn = file("1.txt", "w", encoding = 'UTF-8')
+      conn = file(paste0(input$plr, "1.txt"), "w", encoding = 'UTF-8')
     } else {
       conn = file("1c.cpp", "w", encoding = 'UTF-8')
     }
@@ -482,7 +493,7 @@ function(input, output) {
     t = 0
     ra = file("AnsA.txt", "r", encoding = 'UTF-8')
     if (input$programminglanguage == 2) {
-      conn = file("in.txt", "w", encoding = 'UTF-8')
+      conn = file(paste0(input$plr, "in.txt"), "w", encoding = 'UTF-8')
       con = file("TestsA.txt", "r", encoding = 'UTF-8')
       while ( TRUE ) {
         line = readLines(con, n = 1)
@@ -492,9 +503,9 @@ function(input, output) {
         if (line == ".") {
           t = t + 1
           close(conn)
-          shell.exec("p.bat")
+          shell.exec(paste0(input$plr, "p.bat"))
           Sys.sleep(2)
-          ex = file("ex.txt", "r", encoding = 'UTF-8')
+          ex = file(paste0(input$plr, "ex.txt"), "r", encoding = 'UTF-8')
           q = readLines(ex, n = 1)
           if (length(q) != 0){
             tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
@@ -505,7 +516,7 @@ function(input, output) {
             break
           }
           close(ex)
-          ya = file("out.txt", "r", encoding = 'UTF-8')
+          ya = file(paste0(input$plr, "out.txt"), "r", encoding = 'UTF-8')
           while(TRUE) {
             line2 = readLines(ya, n = 1)
             l = readLines(ra, n = 1)
@@ -546,7 +557,7 @@ function(input, output) {
             }
           }
           close(ya)
-          conn = file("in.txt", "w", encoding = 'UTF-8')
+          conn = file(paste0(input$plr, "in.txt"), "w", encoding = 'UTF-8')
           if (v == 1) {
             break
           }
