@@ -1,3 +1,7 @@
 Pogramminglanguage, Result, Test
-Python, RT,2
+C++, CE,-
+C++, CE,-
+C++, CE,-
+C++, CE,-
 Python, CE,-
+C++, PE,1

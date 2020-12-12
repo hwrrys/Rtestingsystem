@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "1.txt", line 4, in <module>
-    a = f
-NameError: name 'f' is not defined

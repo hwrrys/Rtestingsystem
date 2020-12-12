@@ -465,16 +465,16 @@ function(input, output) {
         tx = file(paste0(input$plr, "ex.txt"), "w", encoding = 'UTF-8')
         close(tx)
         bp = file(paste0(input$plr, "c++.bat"), "w", encoding = 'UTF-8')
-        writeLines("set PATH=mingw64\bin;%PATH%",bp, sep = "\n")
+        writeLines("set PATH=mingw64\\bin;%PATH%",bp, sep = "\n")
         writeLines("rem echo %PATH%",bp, sep = "\n")
-        writeLines('rem cd "mingw64\bin"\ ',bp, sep = "\n")
+        writeLines('rem cd "mingw64\\bin"\\',bp, sep = "\n")
         writeLines(paste0(input$plr, paste0("a.exe > ", paste0(input$plr, paste0("out.txt < ", paste0(input$plr, paste0("in.txt 2> ", paste0(input$plr, "ex.txt"))))))), bp, sep = "\n")
         close(bp)
         bp = file(paste0(input$plr, "co++.bat"), "w", encoding = 'UTF-8')
-        writeLines("set PATH=mingw64\bin;%PATH%",bp, sep = "\n")
+        writeLines("set PATH=mingw64\\bin;%PATH%",bp, sep = "\n")
         writeLines("rem echo %PATH%",bp, sep = "\n")
-        writeLines('rem cd "mingw64\bin"\ ',bp, sep = "\n")
-        writeLines(paste0("g++ ", paste0(input$plr, paste0("1c.cpp > ", paste0(input$plr, paste0("a.exe < ", paste0(input$plr, "ex.txt")))))), bp, sep = "\n")
+        writeLines('rem cd "mingw64\\bin"\\',bp, sep = "\n")
+        writeLines(paste0("g++ -o ", paste0(input$plr, paste0("a.exe ", paste0(input$plr, paste0("1c.cpp 2> ", paste0(input$plr, "ex.txt")))))), bp, sep = "\n")
         close(bp)
         tx = file(paste0(input$plr, "1c.cpp"), "w", encoding = 'UTF-8')
         close(tx)
@@ -490,9 +490,9 @@ function(input, output) {
     name = logi()
     con = file(input$fileA$name, "r", encoding = 'UTF-8')
     if (input$programminglanguage == 2) {
-      conn = file(paste0(input$plr, "1.txt"), "w", encoding = 'UTF-8')
+      conn = file(paste0(name, "1.txt"), "w", encoding = 'UTF-8')
     } else {
-      conn = file(paste0(input$plr, "1c.cpp"), "w", encoding = 'UTF-8')
+      conn = file(paste0(name, "1c.cpp"), "w", encoding = 'UTF-8')
     }
     while ( TRUE ) {
       line = readLines(con, n = 1)
@@ -507,7 +507,7 @@ function(input, output) {
     t = 0
     ra = file("AnsA.txt", "r", encoding = 'UTF-8')
     if (input$programminglanguage == 2) {
-      conn = file(paste0(input$plr, "in.txt"), "w", encoding = 'UTF-8')
+      conn = file(paste0(name, "in.txt"), "w", encoding = 'UTF-8')
       con = file("TestsA.txt", "r", encoding = 'UTF-8')
       while ( TRUE ) {
         line = readLines(con, n = 1)
@@ -517,9 +517,9 @@ function(input, output) {
         if (line == ".") {
           t = t + 1
           close(conn)
-          shell.exec(paste0(input$plr, "p.bat"))
+          shell.exec(paste0(name, "p.bat"))
           Sys.sleep(2)
-          ex = file(paste0(input$plr, "ex.txt"), "r", encoding = 'UTF-8')
+          ex = file(paste0(name, "ex.txt"), "r", encoding = 'UTF-8')
           q = readLines(ex, n = 1)
           if (length(q) != 0){
             if (t == 1) {
@@ -538,7 +538,7 @@ function(input, output) {
             break
           }
           close(ex)
-          ya = file(paste0(input$plr, "out.txt"), "r", encoding = 'UTF-8')
+          ya = file(paste0(name, "out.txt"), "r", encoding = 'UTF-8')
           while(TRUE) {
             line2 = readLines(ya, n = 1)
             l = readLines(ra, n = 1)
@@ -579,7 +579,7 @@ function(input, output) {
             }
           }
           close(ya)
-          conn = file(paste0(input$plr, "in.txt"), "w", encoding = 'UTF-8')
+          conn = file(paste0(name, "in.txt"), "w", encoding = 'UTF-8')
           if (v == 1) {
             break
           }
@@ -595,9 +595,9 @@ function(input, output) {
         ms(name,1,1)
       }
     } else {
-      shell.exec("co++.bat")
+      shell.exec(paste0(name, "co++.bat"))
       Sys.sleep(10)
-      ex = file("ex.txt", "r", encoding = 'UTF-8')
+      ex = file(paste0(name, "ex.txt"), "r", encoding = 'UTF-8')
       llll = readLines(ex, n = 1)
       if (length(llll) != 0) {
         tt = file(paste0(name, "A.txt"), 'a', encoding = 'UTF-8')
@@ -607,7 +607,7 @@ function(input, output) {
         v = 1
       }
       close(ex)
-      conn = file("in.txt", "w", encoding = 'UTF-8')
+      conn = file(paste0(name, "in.txt"), "w", encoding = 'UTF-8')
       con = file("TestsA.txt", "r", encoding = 'UTF-8')
       while ( TRUE ) {
         if (v == 1) {
@@ -620,9 +620,9 @@ function(input, output) {
         if (line == ".") {
           t = t + 1
           close(conn)
-          shell.exec("c++.bat")
+          shell.exec(paste0(name, "c++.bat"))
           Sys.sleep(2)
-          ya = file("out.txt", "r", encoding = 'UTF-8')
+          ya = file(paste0(name, "out.txt"), "r", encoding = 'UTF-8')
           while(TRUE) {
             line2 = readLines(ya, n = 1)
             l = readLines(ra, n = 1)
@@ -663,7 +663,7 @@ function(input, output) {
             }
           }
           close(ya)
-          conn = file("in.txt", "w", encoding = 'UTF-8')
+          conn = file(paste0(name, "in.txt"), "w", encoding = 'UTF-8')
         } else {
           writeLines(line,conn, sep = "\n")
         }
