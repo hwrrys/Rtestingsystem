@@ -264,7 +264,7 @@ function(input, output) {
                ),
                tabPanel(
                  "Table of results",
-                 tableOutput("tab_res"),
+                 dataTableOutput("tab_res"),
                  actionButton("TaU", label = "Update Table", icon("sync")),
                  hr()
                )
@@ -371,7 +371,7 @@ function(input, output) {
              ),
              tabPanel(
                "Table of results",
-               tableOutput("tab_res"),
+               dataTableOutput("tab_res"),
                actionButton("TaU", label = "Update Table", icon("sync")),
                hr()
              )
@@ -2577,7 +2577,7 @@ function(input, output) {
   TabU <- eventReactive(input$TaU, {
     read.csv("Table_of_results.txt", sep = ",", encoding = 'UTF-8')
   }, ignoreNULL = FALSE)
-  output$tab_res <- renderTable({
+  output$tab_res <- renderDataTable({
     TabU()
   })
 }
