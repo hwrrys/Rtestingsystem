@@ -2,7 +2,7 @@ library(shiny)
 library(shinydashboard)
 library(shinythemes)
 library(shinyjs)
-
+library(png)
 
 Sys.setlocale("LC_ALL", "Russian")
 aa <<- 0
@@ -12,42 +12,58 @@ nor <<- 0
 
 
 ui <-
-    dashboardPage(skin ="green",
-      dashboardHeader(tags$li(class = "dropdown",actionButton("Login", label = "Login/Logout", icon("arrow-left"),style = "color: #fff; background-color: #00a65a; border-color: #00a65a")),
-                     (tags$li(class = "dropdown",actionButton("registery", label = "Register",icon("pencil"), style = "color: #fff; background-color: #00a65a; border-color: #00a65a"))),
-      title = "HGwr",
-      titleWidth = 230),
-      dashboardSidebar(
-  
-        sidebarMenu(
-          menuItem("Tasks", tabName = "dashboard", icon = icon("tasks")),
-          menuItem("Scoreboard", tabName = "scoreboard", icon = icon("signal")),
-          menuItem("Settings", tabName = "settings", icon = icon("cog"))
-        )
-    ),
-    dashboardBody(
-      tabItems(
-        # First tab content
-        tabItem(tabName = "dashboard",
-                mainPanel(
-                  theme = shinytheme("paper"),
+  dashboardPage(skin ="green",
+                dashboardHeader(tags$li(class = "dropdown",actionButton("Login", label = "Login/Logout", icon("arrow-left"),style = "color: #fff; background-color: #00a65a; border-color: #00a65a")),
+                                (tags$li(class = "dropdown",actionButton("registery", label = "Register",icon("pencil"), style = "color: #fff; background-color: #00a65a; border-color: #00a65a"))),
+                                title = "HGwr",
+                                titleWidth = 230),
+                dashboardSidebar(
                   
+                  sidebarMenu(
+                    menuItem("Tasks", tabName = "dashboard", icon = icon("tasks")),
+                    menuItem("Scoreboard", tabName = "scoreboard", icon = icon("signal")),
+                    menuItem("Settings", tabName = "settings", icon = icon("cog")),
+                    menuItem("About Us", tabName = "aboutus", icon = icon("fire"))
+                  )
                 ),
-                uiOutput("ui")
-        ),
-        
-        tabItem(tabName = "scoreboard",
-                dataTableOutput("tab_res"),
-                actionButton("TaU", label = "Update Table", icon("sync")),
-                hr()
-        ),
-        tabItem(tabName = "settings",
-        )
-      ),
-    )
+                dashboardBody(
+                  tabItems(
+                    # First tab content
+                    tabItem(tabName = "dashboard",
+                            mainPanel(
+                              theme = shinytheme("paper"),
+                              
+                            ),
+                            uiOutput("ui")
+                    ),
+                    
+                    tabItem(tabName = "scoreboard",
+                            dataTableOutput("tab_res"),
+                            actionButton("TaU", label = "Update Table", icon("sync")),
+                            hr()
+                    ),
+                    tabItem(tabName = "settings",
+                    ),
+                    tabItem(tabName = "aboutus",
+                            imageOutput("myImage")
+                    )
+                  ),
+                )
   )
 
-server <- function(input, output) {
+server <- function(input, output, session) {
+  
+  output$myImage <- renderImage({
+    # When input$n is 3, filename is ./images/image3.jpeg
+    filename <- normalizePath(file.path('.',
+                                        "sil.png"))
+    
+    # Return a list containing the filename and alt text
+    list(src = filename,
+         alt = "sil", width = 360, height = 360)
+    
+  }, deleteFile = FALSE)
+  
   arr_sort <- function(c) {
     i = length(c)-1
     while(i > 0) {
@@ -169,6 +185,7 @@ server <- function(input, output) {
     }
   }, ignoreNULL = FALSE)
   Log <- eventReactive(input$Login, {
+    print(aa)
     if (aa == 1){
       assign("rez", "", envir = .GlobalEnv)
       assign("aa", 0, envir = .GlobalEnv)
