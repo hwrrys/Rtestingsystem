@@ -169,7 +169,6 @@ server <- function(input, output) {
     }
   }, ignoreNULL = FALSE)
   Log <- eventReactive(input$Login, {
-    print(aa)
     if (aa == 1){
       assign("rez", "", envir = .GlobalEnv)
       assign("aa", 0, envir = .GlobalEnv)
