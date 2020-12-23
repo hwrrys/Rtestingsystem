@@ -13,8 +13,8 @@ nor <<- 0
 
 ui <-
   dashboardPage(skin ="green",
-                dashboardHeader(tags$li(class = "dropdown",actionButton("Login", label = "Login/Logout", icon("arrow-left"),style = "color: #fff; background-color: #00a65a; border-color: #00a65a")),
-                                (tags$li(class = "dropdown",actionButton("registery", label = "Register",icon("pencil"), style = "color: #fff; background-color: #00a65a; border-color: #00a65a"))),
+                dashboardHeader(tags$li(class = "dropdown",actionButton("Login", label = "Login/Logout", icon("arrow-left"),height = 500, style = "color: #fff; background-color: #00a65a; border-color: #00a65a")),
+                                (tags$li(class = "dropdown",actionButton("registery", label = "Register",icon("pencil"),height = 500,  style = "color: #fff; background-color: #00a65a; border-color: #00a65a"))),
                                 title = "HGwr",
                                 titleWidth = 230),
                 dashboardSidebar(
@@ -45,7 +45,9 @@ ui <-
                     tabItem(tabName = "settings",
                     ),
                     tabItem(tabName = "aboutus",
-                            imageOutput("myImage")
+                            imageOutput("myImage"),
+                            imageOutput("myImage2"),
+                            imageOutput("myImage3")
                     )
                   ),
                 )
@@ -54,16 +56,26 @@ ui <-
 server <- function(input, output, session) {
   
   output$myImage <- renderImage({
-    # When input$n is 3, filename is ./images/image3.jpeg
     filename <- normalizePath(file.path('.',
                                         "sil.png"))
-    
-    # Return a list containing the filename and alt text
     list(src = filename,
          alt = "sil", width = 360, height = 360)
     
   }, deleteFile = FALSE)
-  
+  output$myImage2 <- renderImage({
+    filename <- normalizePath(file.path('.',
+                                        "ava2.jpg"))
+    list(src = filename,
+         alt = "sil", width = 360, height = 500)
+    
+  }, deleteFile = FALSE)
+  output$myImage3 <- renderImage({
+    filename <- normalizePath(file.path('.',
+                                        "ava3.jpg"))
+    list(src = filename,
+         alt = "sil", width = 360, height = 410)
+    
+  }, deleteFile = FALSE)
   arr_sort <- function(c) {
     i = length(c)-1
     while(i > 0) {
