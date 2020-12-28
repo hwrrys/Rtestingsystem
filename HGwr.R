@@ -15,7 +15,7 @@ ui <-
   dashboardPage(skin ="green",
                 dashboardHeader(tags$li(class = "dropdown",actionButton("Login", label = "Login/Logout", icon("arrow-left"),height = 500, style = "color: #fff; background-color: #00a65a; border-color: #00a65a")),
                                 (tags$li(class = "dropdown",actionButton("registery", label = "Register",icon("pencil"),height = 500,  style = "color: #fff; background-color: #00a65a; border-color: #00a65a"))),
-                                title = "HGwr",
+                                title = "Stone",
                                 titleWidth = 230),
                 dashboardSidebar(
                   
@@ -43,11 +43,13 @@ ui <-
                             hr()
                     ),
                     tabItem(tabName = "settings",
+                            shinythemes::themeSelector(),
                     ),
                     tabItem(tabName = "aboutus",
                             imageOutput("myImage"),
                             imageOutput("myImage2"),
-                            imageOutput("myImage3")
+                            imageOutput("myImage3"),
+                            imageOutput("myImage4"),
                     )
                   ),
                 )
@@ -66,14 +68,21 @@ server <- function(input, output, session) {
     filename <- normalizePath(file.path('.',
                                         "ava2.jpg"))
     list(src = filename,
-         alt = "sil", width = 360, height = 500)
+         alt = "g", width = 360, height = 500)
+    
+  }, deleteFile = FALSE)
+  output$myImage4 <- renderImage({
+    filename <- normalizePath(file.path('.',
+                                        "ava3.jpg"))
+    list(src = filename,
+         alt = "h", width = 360, height = 410)
     
   }, deleteFile = FALSE)
   output$myImage3 <- renderImage({
     filename <- normalizePath(file.path('.',
-                                        "ava3.jpg"))
+                                        "1.jpg"))
     list(src = filename,
-         alt = "sil", width = 360, height = 410)
+         alt = "p", width = 746, height = 120)
     
   }, deleteFile = FALSE)
   arr_sort <- function(c) {
