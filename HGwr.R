@@ -354,6 +354,14 @@ server <- function(input, output, session) {
              tabsetPanel(
                type = "tabs",
                tabPanel(
+                 "All tasks",
+                 sidebarPanel(
+                   selectInput("bals", label = h3("Balls sustem"), 
+                               choices = list("balls_sustem" = 1, "not_balls_sustem" = 2), 
+                               selected = 2),
+                 ),
+               ),
+               tabPanel(
                  "Task A",
                  sidebarPanel(
                    fileInput("descriptionA", label = "Description here"),
