@@ -347,6 +347,15 @@ server <- function(input, output, session) {
                  tableOutput('UUZ'),
                  tableOutput("UZ"),
                  hr()
+               ),
+               tabPanel(
+                 "Chat",
+                 fileInput("Messange", label = h3("Put Your Messange Here")),
+                 actionButton("Chtm", label = "Send", icon("paper-plane")),
+                 actionButton("Upc", label = "Update Chat", icon("sync")),
+                 verbatimTextOutput("Chat"),
+                 verbatimTextOutput("Chat2"),
+                 hr()
                )
              ),
            )),
@@ -2669,6 +2678,59 @@ server <- function(input, output, session) {
   }, ignoreNULL = FALSE)
   output$tab_res <- renderDataTable({
     TabU()
+  })
+  uuu <- eventReactive(input$Chtm, {
+    con = file("musor.txt", "w", encoding = "UTF-8")
+    conn = file(input$Messange$name, "r", encoding = "UTF-8")
+    writeLines(paste0(logi(), ':'), con, sep = "\n")
+    while(TRUE) {
+      line = readLines(conn, n = 1)
+      if (length(line) == 0) {
+        break
+      }
+      writeLines(line, con, sep = '\n')
+    }
+    writeLines(' ', con, sep = '\n')
+    close(conn)
+    conn = file("Chat.txt", "r", encoding = "UTF-8")
+    while(TRUE) {
+      line = readLines(conn, n = 1)
+      if (length(line) == 0) {
+        break
+      }
+      writeLines(line, con, sep = '\n')
+    }
+    close(conn)
+    close(con)
+    con = file("Chat.txt", "w", encoding = "UTF-8")
+    conn = file("musor.txt", "r", encoding = "UTF-8")
+    while(TRUE) {
+      line = readLines(conn, n = 1)
+      if (length(line) == 0) {
+        break
+      }
+      writeLines(line, con, sep = '\n')
+    }
+    close(conn)
+    close(con)
+  }, ignoreNULL = TRUE)
+  eee <- eventReactive(input$Upc, {
+    conn = file("Chat.txt", "r", encoding = "UTF-8")
+    while(TRUE) {
+      line = readLines(conn, n = 1)
+      if (length(line) == 0) {
+        break
+      }
+      cat(line)
+      cat("\n")
+    }
+    close(conn)
+  }, ignoreNULL = FALSE)
+  output$Chat <- renderPrint({
+    eee()
+  })
+  output$Chat2 <- renderPrint({
+    uuu()
   })
 }
 shinyApp(ui, server)
